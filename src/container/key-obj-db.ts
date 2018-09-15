@@ -1,6 +1,6 @@
 import {inject, injectable} from "inversify";
 import {DbContainer} from "./db";
-import {CType, IInstallable} from "../declaration";
+import {CType, IInstallable, ISaveable} from "../declaration";
 
 @injectable()
 export class KeyObjDbContainer implements IInstallable {
@@ -14,12 +14,65 @@ export class KeyObjDbContainer implements IInstallable {
     async install():Promise<void> {
         let db = await this.dbContainer.getDb();
         await db.createCollection<any>(this.collectionName);
+        await db.collection(this.collectionName).createIndex({'key': 1}, {unique: true});
         return;
     }
 
     async uninstall(): Promise<void> {
         let db = await this.dbContainer.getDb();
         await db.dropCollection(this.collectionName);
+    }
+
+    async load<T>(key: string): Promise<T | null> {
+        let db = await this.dbContainer.getDb();
+        let row = await db.collection(this.collectionName).findOne({key});
+        if (row) return row['object'];
+        return null
+    }
+
+    async save(key: string, object: any): Promise<void> {
+        let db = await this.dbContainer.getDb();
+        await db.collection(this.collectionName).updateOne({key}, {$set: {object}}, {upsert: true});
+    }
+
+}
+
+@injectable()
+export class BaseMemento<S> implements ISaveable {
+    protected key: string = 'memento.base';
+    protected state!: S;
+    protected defaultState!: S;
+
+    constructor(
+        @inject(CType.KeyObjDb)
+        protected keyObjDbContainer: KeyObjDbContainer
+    ) {}
+
+    async getState(force=false): Promise<S> {
+        if (force || !this.state ) {
+            let state = await this.load();
+            if (!state) {
+                state = this.defaultState;
+            }
+            this.state = state;
+        }
+
+        return this.state;
+    }
+
+    async setState(state: S, toSave=true): Promise<void> {
+        this.state = state;
+        if (toSave) {
+            await this.save();
+        }
+    }
+
+    async load(): Promise<S|null> {
+        return await this.keyObjDbContainer.load<S>(this.key);
+    }
+
+    async save(): Promise<void> {
+        await this.keyObjDbContainer.save(this.key, this.state);
     }
 
 }

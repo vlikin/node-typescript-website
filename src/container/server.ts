@@ -1,11 +1,12 @@
 import {inject, injectable, multiInject} from "inversify";
-import {IRoute, IRouteInfo} from "../core/route";
-import {default as express, NextFunction, Request, Response} from "express";
+import {IRoute, IRouteInfo, IRouteRegister} from "../core/route";
+import {default as express, NextFunction, Request, Response, Application, IRouterMatcher} from "express";
 import {CType, IConfig} from "../declaration";
+import BodyParser from 'body-parser';
 
 @injectable()
 export class ServerContainer {
-    public application: any;
+    public application!: Application;
 
     constructor(
         @inject(CType.Config)
@@ -17,9 +18,10 @@ export class ServerContainer {
 
     build() {
         this.application = express();
-        this.routes.forEach((route: IRoute) => {
-            let info: IRouteInfo = route.info();
-            this.application[info.method](info.path, (request: Request, response: Response, next: NextFunction): any => {
+        this.application.use(BodyParser.json());
+        this.routes.forEach((route: IRouteRegister) => {
+            let info: IRouteInfo = route.getInfo();
+            this.application[info.method!](info.path, (request: Request, response: Response, next: NextFunction): any => {
                 return route.handler(request, response, next);
             })
         })

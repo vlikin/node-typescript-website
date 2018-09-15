@@ -10,6 +10,7 @@ describe('Routes', () => {
     const serverContainer = container.get<ServerContainer>(CType.Server);
     serverContainer.build();
     const app = serverContainer.application;
+    let authToken: string = config.dynamicConfig.adminPassword;
 
     it('Test route', async () => {
         let response = await request(app)
@@ -17,5 +18,20 @@ describe('Routes', () => {
             .expect(200);
         let testText = `Hello route ${config.server.port}`;
         should(response.text).equal(testText);
+    });
+
+    it('Wrong admin token', async () => {
+        await request(app)
+            .get('/admin/client-config')
+            .set('Authorization', `bearer wrong${authToken}`)
+            .expect(403);
+    });
+
+    it('Right admin token', async () => {
+        let response = await request(app)
+            .get('/admin/client-config')
+            .set('Authorization', `bearer ${authToken}`)
+            .expect(200);
+        should(response.body.config.defaultLanguage).equal('en');
     });
 });

@@ -4,7 +4,7 @@ import {Command as CCommand} from "commander";
 export interface ICommandInfo {
     command: string,
     description: string,
-    options: string[]
+    options?: string[]
 }
 
 export interface ICommand {
@@ -21,9 +21,11 @@ export abstract class AbstractCommand implements ICommand {
             .command(info.command)
             .description(info.description)
             .action((env: any, options: any) => this.command(env, options));
-        info.options.forEach((option) => {
-            command.option(option)
-        });
+        if (info.options) {
+            info.options.forEach((option) => {
+                command.option(option)
+            });
+        }
     }
 
     abstract command(env: any, options: any): void;

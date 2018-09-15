@@ -10,7 +10,8 @@
     "cli": "node built/cli.js",
     "server": "node built/server.js",
     "dev:server": "configFile=../config/dev.js node $NODE_DEBUG_OPTION built/server.js",
-    "dev:cli": "configFile=../config/dev.js node $NODE_DEBUG_OPTION built/cli.js --configFile=../config/dev.js"
+    "dev:cli": "configFile=../config/dev.js node $NODE_DEBUG_OPTION built/cli.js",
+    "dev:cli initial-data": "configFile=../config/dev.js node $NODE_DEBUG_OPTION built/cli.js initial-data"
   },
   "repository": {
     "type": "git",
@@ -23,18 +24,26 @@
   },
   "homepage": "https://github.com/vlikin/node-typescript-website#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "colors": "^1.3.2",
     "commander": "^2.17.1",
     "express": "^4.16.3",
+    "inquirer": "^6.2.0",
     "inversify": "^4.13.0",
+    "js-yaml": "^3.12.0",
+    "jsonwebtoken": "^8.3.0",
     "mocha": "^5.2.0",
     "mongodb": "^3.1.4",
     "reflect-metadata": "^0.1.12",
     "should": "^13.2.3"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.1",
     "@types/express": "^4.16.0",
+    "@types/inquirer": "0.0.43",
+    "@types/js-yaml": "^3.11.2",
+    "@types/jsonwebtoken": "^7.2.8",
     "@types/lodash": "^4.14.116",
     "@types/mocha": "^5.2.5",
     "@types/mongodb": "^3.1.4",
