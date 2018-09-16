@@ -4,11 +4,10 @@ import {ICommand} from "./core/command";
 import {CliContainer} from "./container/cli";
 import {
     ChangeAdminPasswordCommand,
-    InitialDataCommand,
     InstallCommand,
     ReinstallCommand,
     UninstallCommand
-} from "./command";
+} from "./command/index";
 import {ClientConfigAdminRoute, TestRoute} from "./route";
 import {IRoute} from "./core/route";
 import {ServerContainer} from "./container/server";
@@ -19,6 +18,7 @@ import {DynamicConfigMemento} from "./memento";
 import {CoreContainer} from "./container/core";
 import {ShellContainer} from "./container/shell";
 import {PostModel} from "./model/post";
+import {InitialDataCommand} from "./command/initial-data";
 
 declare var process : {
     env: {

@@ -1,14 +1,14 @@
 import {inject, injectable} from "inversify";
-import {AbstractCommand} from './core/command';
-import {CType, IConfig} from "./declaration";
+import {AbstractCommand} from '../core/command';
+import {CType, IConfig} from "../declaration";
 import 'colors';
 import inquirer from 'inquirer';
-import {ShellContainer} from "./container/shell";
-import {DynamicConfigMemento} from "./memento";
+import {ShellContainer} from "../container/shell";
+import {DynamicConfigMemento} from "../memento";
 import yaml from 'js-yaml';
 import fs from 'fs';
 import path from 'path';
-import {IPostData, PostModel} from "./model/post";
+import {IPostData, PostModel} from "../model/post";
 
 @injectable()
 export class InstallCommand extends AbstractCommand {
@@ -131,56 +131,5 @@ export class ChangeAdminPasswordCommand extends AbstractCommand {
         await this.dynamicConfig.setState(state);
         console.log('Admin password has been changed!'.red);
         await this.shellContainer.dispose()
-    }
-}
-
-
-@injectable()
-export class InitialDataCommand extends AbstractCommand {
-    @inject(CType.Config)
-    private config!: IConfig;
-    @inject(CType.Memento.DynamicConfig)
-    private dynamicConfig!: DynamicConfigMemento;
-    @inject(CType.Content.Post)
-    private postModel!: PostModel;
-    @inject(CType.Shell)
-    private shellContainer!: ShellContainer;
-
-    info() {
-        return {
-            command: 'initial-data',
-            description: 'Sets initial data.',
-            options: []
-        }
-    }
-
-    async command(env: any, options: any): Promise<void> {
-        // await this.shellContainer.uninstall();
-        // await this.shellContainer.install();
-
-        const postFile = 'yaml/section/blog.yaml';
-        console.log(path.resolve(postFile));
-        let doc = yaml.safeLoad(fs.readFileSync(postFile, 'utf8'));
-        doc['ua'] = doc['uk'];
-        delete doc['uk'];
-        let posts: IPostData[] = [];
-        for (let i = 0; i < doc['en']['articles'].length; i++) {
-            let defArticle = doc['en']['articles'][i];
-            let post: IPostData = {
-                link: defArticle.href,
-                date: new Date(),
-                translations: {}
-            };
-            this.config.languages.forEach((language) => {
-               let oldPost = doc[language]['articles'][i];
-               post.translations[language] = oldPost['title'];
-            });
-            posts.push(post);
-        }
-        posts.forEach(async (post) => {
-           return await this.postModel.create(post)
-        });
-
-        console.log('Posts have been migrated!'.red);
     }
 }

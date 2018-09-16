@@ -1,15 +1,15 @@
-import {bootstrapCore, resolveConfig} from "../../bootstrap";
+import {bootstrapCore, bootstrapShell, resolveConfig} from "../../bootstrap";
 import {CType} from "../../declaration";
 import should = require("should");
 import {ShellContainer} from "../../container/shell";
 
 describe('Shell Container', () => {
     const config = resolveConfig();
-    const container = bootstrapCore(config);
+    const container = bootstrapShell(config);
     const shellContainer = container.get<ShellContainer>(CType.Shell);
 
     before(async () => {
-        await shellContainer.install();
+        return await shellContainer.install();
     });
 
     it('Shell', () => {
@@ -19,6 +19,6 @@ describe('Shell Container', () => {
 
     after(async () => {
         await shellContainer.uninstall();
-        await shellContainer.dispose();
+        return await shellContainer.dispose();
     });
 });
