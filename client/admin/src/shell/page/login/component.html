@@ -1,0 +1,11 @@
+<div fxLayout="row" fxFlexFill fxLayoutAlign="center center">
+  <mat-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input matInput  placeholder="Password"  formControlName="password" [type]="hide ? 'password' : 'text'" />
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </mat-form-field>
+      <button mat-button color="primary" (click)="onSubmit()" [disabled]="isProcessing || form.invalid">Login</button>
+    </form>
+  </mat-card>
+</div>

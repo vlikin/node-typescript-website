@@ -2,6 +2,7 @@ import {inject, injectable} from "inversify";
 import {NextFunction, Request, RequestHandler, Response} from 'express';
 import _ from 'lodash';
 import {CType, IConfig} from "../declaration";
+import {CoreContainer} from "../container/core";
 
 export enum EMethod {
     get = 'get',
@@ -55,6 +56,8 @@ export abstract class AbstractRoute implements IRoute {
 export abstract class AbstactAdminRoute extends AbstractRoute {
     @inject(CType.Config)
     protected config!: IConfig;
+    @inject(CType.Core)
+    protected  coreContainer!: CoreContainer;
 
 
 
@@ -66,12 +69,13 @@ export abstract class AbstactAdminRoute extends AbstractRoute {
                     message: 'The user have to be authorized.'
                 });
         };
-        let authorizationStr = request.get('Authorization');
+        let authorizationStr = request.get('Authentication');
         if (authorizationStr) {
             let type = authorizationStr.substr(0, 6);
             if (type == 'bearer') {
                 let encryptedToken = authorizationStr.substr(7);
-                if (encryptedToken == this.config.dynamicConfig.adminPassword) {
+                let data = this.coreContainer.decodeToken(encryptedToken);
+                if (data.id == 'admin') {
                     return this.router(request, response, next);
                 }
             }

@@ -8,7 +8,7 @@ import {
     ReinstallCommand,
     UninstallCommand
 } from "./command/index";
-import {ClientConfigAdminRoute, TestRoute} from "./route";
+import {ClientConfigAdminRoute, GetTokenRoute, TestRoute} from "./route";
 import {IRoute} from "./core/route";
 import {ServerContainer} from "./container/server";
 import {CType, IConfig} from "./declaration";
@@ -97,6 +97,7 @@ export function bootstrapServer(config: IConfig): Container {
     // Registers routes.
     container.bind<IRoute>(CType.IRoute).to(TestRoute);
     container.bind<IRoute>(CType.IRoute).to(ClientConfigAdminRoute);
+    container.bind<IRoute>(CType.IRoute).to(GetTokenRoute);
 
     return container;
 }
