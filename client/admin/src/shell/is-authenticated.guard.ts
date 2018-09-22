@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import {Admin} from "./service/admin";
+import {AdminService} from "./service/admin";
 
 @Injectable({
   providedIn: 'root'
 })
 export class IsAuthenticatedGuard implements CanActivate {
   constructor(
-    private adminService: Admin
+    private adminService: AdminService
   ) {}
 
   canActivate(

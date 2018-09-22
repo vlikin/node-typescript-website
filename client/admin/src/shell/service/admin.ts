@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable, of} from "rxjs";
-import {mergeMap, tap} from "rxjs/operators";
-import {MatSnackBar} from "@angular/material";
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {mergeMap, tap} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
 })
-export class Admin {
+export class AdminService {
   token: string;
   private isAuthenticateS: BehaviorSubject<boolean>;
   public isAuthenticatedO: Observable<boolean>;
@@ -57,6 +57,26 @@ export class Admin {
 
   public adminConfigHttp(): Observable<any> {
     return this.http.get('/server/admin/client-config');
+  }
+
+  public adminPostListHttp(): Observable<any> {
+    return this.http.get('/server/admin/post/list');
+  }
+
+  public adminPostGetHttp(_id: string): Observable<any> {
+    return this.http.post('/server/admin/post/get', {_id});
+  }
+
+  public adminPostDeleteHttp(_id: string): Observable<any> {
+    return this.http.post('/server/admin/post/delete', {_id});
+  }
+
+  public adminPostCreateHttp(item): Observable<any> {
+    return this.http.post('/server/admin/post/create', {item});
+  }
+
+  public adminPostSaveHttp(item): Observable<any> {
+    return this.http.post('/server/admin/post/save', {item});
   }
 
   login(token) {

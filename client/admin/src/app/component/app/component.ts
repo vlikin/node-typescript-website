@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import {Observable} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map} from "rxjs/operators";
-import {Admin} from "../../../shell/service/admin";
 import {Router} from "@angular/router";
+import {AdminService} from "../../../shell/service/admin";
 
 @Component({
   selector: 'dmn-root',
@@ -22,7 +22,7 @@ export class AppComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private adminService: Admin,
+    private adminService: AdminService,
     private router: Router
   ) {}
 

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Admin} from "../../service/admin";
-import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AdminService} from '../../service/admin';
 
 @Component({
   selector: 'dmn-login-page',
   templateUrl: 'component.html',
   styleUrls: ['component.sass']
 })
-export class LoginPage implements OnInit {
+export class LoginPageComponent implements OnInit {
   hide = true;
   isProcessing = false;
 
@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     private router: Router,
-    private adminService: Admin
+    private adminService: AdminService
   ) { }
 
   onSubmit() {
@@ -36,10 +36,9 @@ export class LoginPage implements OnInit {
           this.isProcessing = false;
         },
         (error) => {
-          console.log(error);
           this.isProcessing = false;
         }
-      )
+      );
   }
 
   ngOnInit() {

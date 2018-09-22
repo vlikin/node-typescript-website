@@ -1,12 +1,12 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
-import {Admin} from "./service/admin";
+import {AdminService} from "./service/admin";
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
   constructor(
-    private adminService: Admin
+    private adminService: AdminService
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
