@@ -48,6 +48,10 @@ describe('Post model', () => {
       await postModel.delete(postId);
       let nullPost = await postModel.get(postId);
       should(nullPost).is.null();
+
+      // List.
+      let posts = await postModel.list();
+      should(posts.length).above(0);
    });
 
     after(async () => {

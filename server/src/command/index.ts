@@ -129,7 +129,7 @@ export class ChangeAdminPasswordCommand extends AbstractCommand {
         let state = await this.dynamicConfig.getState();
         state.adminPassword = answers.password;
         await this.dynamicConfig.setState(state);
-        console.log('Admin password has been changed!'.red);
+        console.log('AdminService password has been changed!'.green);
         await this.shellContainer.dispose()
     }
 }

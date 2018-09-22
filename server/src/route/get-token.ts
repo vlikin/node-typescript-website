@@ -1,50 +1,9 @@
 import {inject, injectable} from "inversify";
-import {AbstactAdminRoute, AbstractRoute, EMethod, IRouteInfo} from "./core/route";
+import {AbstractRoute, EMethod, IRouteInfo} from "../core/route";
+import {CType, IDynamicConfig, ITokenData} from "../declaration";
+import {DynamicConfigMemento} from "../memento";
+import {CoreContainer} from "../container/core";
 import {NextFunction, Request, Response} from "express";
-import {CType, IConfig, IDynamicConfig, ITokenData} from "./declaration";
-import {CoreContainer} from "./container/core";
-import {DynamicConfigMemento} from "./memento";
-
-@injectable()
-export class TestRoute extends AbstractRoute {
-  @inject(CType.Config)
-  private config!: IConfig;
-
-  constructor() {
-    super();
-  }
-
-  info(): IRouteInfo {
-    return {
-      path: '/test',
-      method: EMethod.get
-    }
-  }
-
-  router(request: Request, response: Response, next: NextFunction): any {
-    response.send(`Hello route ${this.config.server.port}`);
-  }
-}
-
-@injectable()
-export class ClientConfigAdminRoute extends AbstactAdminRoute {
-  constructor() {
-    super();
-  }
-
-  info(): IRouteInfo {
-    return {
-      path: '/admin/client-config',
-      method: EMethod.get
-    }
-  }
-
-  router(request: Request, response: Response, next: NextFunction): any {
-    response.json({
-      config: this.config.client
-    });
-  }
-}
 
 @injectable()
 export class GetTokenRoute extends AbstractRoute {
@@ -54,7 +13,7 @@ export class GetTokenRoute extends AbstractRoute {
   private coreContainer!: CoreContainer;
 
   constructor()
-   {
+  {
     super();
   }
 
@@ -82,6 +41,5 @@ export class GetTokenRoute extends AbstractRoute {
         .json({message: 'Wrong authentication data.'})
     }
   }
-
 
 }

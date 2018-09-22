@@ -8,7 +8,9 @@ import {
     ReinstallCommand,
     UninstallCommand
 } from "./command/index";
-import {ClientConfigAdminRoute, GetTokenRoute, TestRoute} from "./route";
+import {ClientConfigAdminRoute} from './route/admin/client-config';
+import {GetTokenRoute} from './route/get-token';
+import {TestRoute} from "./route/test";
 import {IRoute} from "./core/route";
 import {ServerContainer} from "./container/server";
 import {CType, IConfig} from "./declaration";
@@ -19,6 +21,13 @@ import {CoreContainer} from "./container/core";
 import {ShellContainer} from "./container/shell";
 import {PostModel} from "./model/post";
 import {InitialDataCommand} from "./command/initial-data";
+import {
+  PostCreateAdminRoute,
+  PostDeleteAdminRoute,
+  PostGetAdminRoute,
+  PostListAdminRoute,
+  PostSaveAdminRoute
+} from "./route/admin/post.g";
 
 declare var process : {
     env: {
@@ -96,8 +105,15 @@ export function bootstrapServer(config: IConfig): Container {
 
     // Registers routes.
     container.bind<IRoute>(CType.IRoute).to(TestRoute);
-    container.bind<IRoute>(CType.IRoute).to(ClientConfigAdminRoute);
     container.bind<IRoute>(CType.IRoute).to(GetTokenRoute);
+
+    // AdminService.
+    container.bind<IRoute>(CType.IRoute).to(ClientConfigAdminRoute);
+    container.bind<IRoute>(CType.IRoute).to(PostListAdminRoute);
+    container.bind<IRoute>(CType.IRoute).to(PostCreateAdminRoute);
+    container.bind<IRoute>(CType.IRoute).to(PostSaveAdminRoute);
+    container.bind<IRoute>(CType.IRoute).to(PostGetAdminRoute);
+    container.bind<IRoute>(CType.IRoute).to(PostDeleteAdminRoute);
 
     return container;
 }
