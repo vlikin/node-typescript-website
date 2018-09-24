@@ -24,7 +24,8 @@ import {AuthenticationInterceptor} from './authentication.interceptor';
 import {DefaultPage} from './page/default';
 import {PostListPageComponent} from './page/post/list';
 import {AdminService} from './service/admin';
-import {EditPostDialogComponent} from './dialog/edit-post';
+import {PostEditPageComponent} from './page/post/edit';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import {EditPostDialogComponent} from './dialog/edit-post';
     FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule,
 
     MatButtonModule,
     MatDatepickerModule,
@@ -52,8 +54,7 @@ import {EditPostDialogComponent} from './dialog/edit-post';
     LoginPageComponent,
     DefaultPage,
     PostListPageComponent,
-
-    EditPostDialogComponent
+    PostEditPageComponent
   ],
   exports: [],
   providers: [
@@ -65,7 +66,6 @@ import {EditPostDialogComponent} from './dialog/edit-post';
     }
   ],
   entryComponents: [
-    EditPostDialogComponent
   ]
 })
 export class ShellModule { }

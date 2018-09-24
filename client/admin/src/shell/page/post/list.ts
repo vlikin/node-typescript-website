@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
 import {AdminService} from '../../service/admin';
-import {EditPostDialogComponent} from '../../dialog/edit-post';
 import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'dmn-post-list-page',
   template: `
-    <button mat-flat-button color="primary" (click)="newPost()">New</button>
     <mat-table [dataSource]='dataSource' class='mat-elevation-z8' fxFlexFill  >
       <ng-container matColumnDef='title'>
         <mat-header-cell mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
@@ -23,10 +21,10 @@ import {MatDialog} from '@angular/material';
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu='matMenu'>
-            <button mat-menu-item (click)='openDialog(element._id)'>
+            <a mat-menu-item [routerLink]="['/post/edit/', element._id]">
               <mat-icon>edit</mat-icon>
               <span>Edit</span>
-            </button>
+            </a>
           </mat-menu>
         </mat-cell>
       </ng-container>
@@ -51,21 +49,5 @@ export class PostListPageComponent {
       .subscribe(({list}) => {
         this.dataSource = list;
       });
-  }
-
-  newPost() {
-    this.openDialog();
-  }
-
-  openDialog(_id=null): void {
-    const dialogRef = this.dialog.open(EditPostDialogComponent, {
-      width: '600px',
-      data: {_id}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      //console.log('The dialog was closed');
-      //this.animal = result;
-    });
   }
 }

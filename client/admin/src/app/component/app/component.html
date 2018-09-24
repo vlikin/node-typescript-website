@@ -12,9 +12,10 @@
         <a mat-list-item [routerLink]="['login']">Login</a>
       </ng-container>
       <ng-container *ngIf="isAuthecnticated_ | async">
-        <a mat-list-item [routerLink]="['/']">Home</a>
-        <a mat-list-item [routerLink]="['/dashboard']">Dashboard</a>
-        <a mat-list-item [routerLink]="['/post/list']">Posts</a>
+        <a mat-list-item routerLink="/">Home</a>
+        <a mat-list-item routerLink="/dashboard">Dashboard</a>
+        <a mat-list-item routerLink="/post/list">Posts</a>
+        <a mat-list-item routerLink="/post/edit/new">New post</a>
         <mat-divider> </mat-divider>
         <a mat-list-item (click)="logout()">Logout</a>
       </ng-container>
