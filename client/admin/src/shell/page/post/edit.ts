@@ -6,55 +6,54 @@ import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'dmn-shll-edit-post-dialog',
-  styles: [],
+  styles: [`
+  `],
   template: `
-    <h2>Post item</h2>
-    <div [formGroup]='form'>
-      <div>
+    <div class="dmn-form">
+      <h2>Post item</h2>
+      <div [formGroup]='form' class="full-width-container">
         <mat-form-field>
           <input type='text' matInput formControlName='link' placeholder='Link'>
         </mat-form-field>
-      </div>
-      <div>
         <mat-form-field>
           <input matInput [matDatepicker]='myDatepicker' formControlName='date'>
           <mat-datepicker-toggle matSuffix [for]='myDatepicker'></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker></mat-datepicker>
         </mat-form-field>
+        <div formGroupName='translations' class="full-width-container">
+          <div formGroupName='en'>
+            <h3>English</h3>
+            <div class="full-width-container">
+              <mat-form-field>
+                <input type='text' matInput formControlName='title' placeholder='title'>
+              </mat-form-field>
+            </div>
+          </div>
+          <div formGroupName='ru' class="full-width-container">
+            <h3>Russian</h3>
+            <div class="full-width-container">
+              <mat-form-field>
+                <input type='text' matInput formControlName='title' placeholder='title'>
+              </mat-form-field>
+            </div>
+          </div>
+          <div formGroupName='ua' class="full-width-container">
+            <h3>Ukrainian</h3>
+            <div class="full-width-container">
+              <mat-form-field>
+                <input type='text' matInput formControlName='title' placeholder='title'>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
       </div>
-      <div formGroupName='translations'>
-        <div formGroupName='en'>
-          <h3>English</h3>
-          <div>
-            <mat-form-field>
-              <input type='text' matInput formControlName='title' placeholder='title'>
-            </mat-form-field>
-          </div>
-        </div>
-        <div formGroupName='ru'>
-          <h3>Russian</h3>
-          <div>
-            <mat-form-field>
-              <input type='text' matInput formControlName='title' placeholder='title'>
-            </mat-form-field>
-          </div>
-        </div>
-        <div formGroupName='ua'>
-          <h3>Ukrainian</h3>
-          <div>
-            <mat-form-field>
-              <input type='text' matInput formControlName='title' placeholder='title'>
-            </mat-form-field>
-          </div>
-        </div>
+      <div class="actions">
+        <button mat-button routerLink="/post/list">Cancel</button>
+        <button mat-flat-button color='primary' (click)='save()' [disabled]='form.invalid || isProcessing'>
+          {{ !item ? 'Create' : 'Save'}}
+        </button>
+        <button mat-flat-button color="warn" (click)="remove()" [disabled]="!item">Remove</button>
       </div>
-    </div>
-    <div>
-      <button mat-button routerLink="/post/list">Cancel</button>
-      <button mat-flat-button color='primary' (click)='save()' [disabled]='form.invalid || isProcessing'>
-        {{ !item ? 'Create' : 'Save'}}
-      </button>
-      <button mat-flat-button color="warn" (click)="remove()" [disabled]="!item">Remove</button>
     </div>
   `
 })

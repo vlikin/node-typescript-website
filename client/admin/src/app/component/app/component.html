@@ -6,7 +6,9 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-toolbar color="primary">
+      <!-- toolbar info -->
+    </mat-toolbar>
     <mat-nav-list>
       <ng-container *ngIf="!(isAuthecnticated_ | async)">
         <a mat-list-item [routerLink]="['login']">Login</a>
@@ -29,9 +31,9 @@
         mat-icon-button
         (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon>menu</mat-icon>
       </button>
-      <span>admin</span>
+      <span>The administer panel</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './component/app/component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ShellModule} from "../shell/shell.module";
+import {ShellModule} from '../shell/shell.module';
 import {
   MatFormFieldModule,
   MatToolbarModule,
@@ -12,7 +12,7 @@ import {
   MatIconModule,
   MatListModule
 } from '@angular/material';
-import {IsAuthenticatedGuard} from "../shell/is-authenticated.guard";
+import {IsAuthenticatedGuard} from '../shell/is-authenticated.guard';
 
 @NgModule({
   declarations: [
