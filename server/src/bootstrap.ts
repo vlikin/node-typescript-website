@@ -28,6 +28,7 @@ import {
   PostListAdminRoute,
   PostSaveAdminRoute
 } from "./route/admin/post.g";
+import {UploadFileAdminRoute} from "./route/admin/upload-file";
 
 declare var process : {
     env: {
@@ -114,6 +115,7 @@ export function bootstrapServer(config: IConfig): Container {
     container.bind<IRoute>(CType.IRoute).to(PostSaveAdminRoute);
     container.bind<IRoute>(CType.IRoute).to(PostGetAdminRoute);
     container.bind<IRoute>(CType.IRoute).to(PostDeleteAdminRoute);
+    container.bind<IRoute>(CType.IRoute).to(UploadFileAdminRoute);
 
     return container;
 }

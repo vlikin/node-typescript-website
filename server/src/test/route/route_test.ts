@@ -5,6 +5,8 @@ import {ServerContainer} from "../../container/server";
 import should from 'should';
 import {ShellContainer} from "../../container/shell";
 import {CoreContainer} from "../../container/core";
+import * as path from "path";
+import * as fs from "fs";
 
 describe('Routes', () => {
   let config: IConfig = resolveConfig();
@@ -83,5 +85,22 @@ describe('Routes', () => {
         .expect(200);
       should(response.body.token.length).above(0);
     });
+  });
+
+  it('Upload the profile document', async () => {
+    let filePath = path.resolve(path.join(
+      __dirname,
+      '../../../fixtures/image.jpg'
+    ));
+    let response = await request(app)
+      .post('/admin/upload-file')
+      .set('Authentication', `bearer ${rAuthToken}`)
+      .attach('document', filePath);
+    let pathToFile = path.join(
+      coreContainer.getFileStorageDir(),
+      response.body.fileName
+    );
+    let isUploaded = fs.existsSync(pathToFile);
+    should(isUploaded).is.true();
   });
 });

@@ -4,6 +4,7 @@ module.exports = {
     server: {
         port: 2909
     },
+    fileStorage: '../files',
     db: {
         name: 'website',
         host: 'localhost',
