@@ -1,9 +1,9 @@
-import {inject, injectable} from "inversify";
-import {AbstractRoute, EMethod, IRouteInfo} from "../core/route";
-import {CType, IDynamicConfig, ITokenData} from "../declaration";
-import {DynamicConfigMemento} from "../memento";
-import {CoreContainer} from "../container/core";
-import {NextFunction, Request, Response} from "express";
+import {inject, injectable} from 'inversify';
+import {AbstractRoute, EMethod, IRouteInfo} from '../core/route';
+import {CType, IDynamicConfig, ITokenData} from '../declaration';
+import {DynamicConfigMemento} from '../memento/dynamic-config';
+import {CoreContainer} from '../container/core';
+import {NextFunction, Request, Response} from 'express';
 
 @injectable()
 export class GetTokenRoute extends AbstractRoute {
@@ -12,8 +12,7 @@ export class GetTokenRoute extends AbstractRoute {
   @inject(CType.Core)
   private coreContainer!: CoreContainer;
 
-  constructor()
-  {
+  constructor() {
     super();
   }
 

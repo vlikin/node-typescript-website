@@ -1,10 +1,10 @@
-import {inject, injectable} from "inversify";
-import {KeyObjDbContainer} from "./key-obj-db";
-import {CType, IConfig} from "../declaration";
-import {DbContainer} from "./db";
-import {DynamicConfigMemento} from "../memento";
-import {PostModel} from "../model/post";
-import {CoreContainer} from "./core";
+import {inject, injectable} from 'inversify';
+import {KeyObjDbContainer} from './key-obj-db';
+import {CType, IConfig} from '../declaration';
+import {DbContainer} from './db';
+import {DynamicConfigMemento} from '../memento/dynamic-config';
+import {PostModel} from '../model/post';
+import {CoreContainer} from './core';
 
 @injectable()
 export class ShellContainer {

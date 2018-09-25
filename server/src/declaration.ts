@@ -42,13 +42,15 @@ export const CType = {
   Shell: Symbol.for('Shell'),
   Config: Symbol.for('Config'),
   Cli: Symbol.for('Cli'),
+  InitialData: Symbol.for('InitialData'),
   Db: Symbol.for('Db'),
   KeyObjDb: Symbol.for('KeyObjDb'),
   Server: Symbol.for('Server'),
   ICommand: Symbol.for('ICommand'),
   IRoute: Symbol.for('IRoute'),
   Memento: {
-    DynamicConfig: Symbol.for('DynamicConfig')
+    DynamicConfig: Symbol.for('DynamicConfig'),
+    Page: Symbol.for('Page')
   },
   Content: {
     Post: Symbol.for('Content')

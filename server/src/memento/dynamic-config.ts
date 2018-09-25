@@ -1,6 +1,6 @@
 import {inject, injectable} from "inversify";
-import {BaseMemento, KeyObjDbContainer} from "./container/key-obj-db";
-import {CType, IDynamicConfig} from "./declaration";
+import {BaseMemento, KeyObjDbContainer} from "../container/key-obj-db";
+import {CType, IDynamicConfig} from "../declaration";
 
 @injectable()
 export class DynamicConfigMemento extends BaseMemento<IDynamicConfig> {
