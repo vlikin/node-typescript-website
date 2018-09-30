@@ -16,7 +16,7 @@ import {
   MatDialogModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatDividerModule
+  MatDividerModule, MatExpansionModule, MatTabsModule
 } from '@angular/material';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardPage } from './page/dashboard/component';
@@ -26,6 +26,7 @@ import {PostListPageComponent} from './page/post/list';
 import {AdminService} from './service/admin';
 import {PostEditPageComponent} from './page/post/edit';
 import {RouterModule} from '@angular/router';
+import {PagePageComponent} from "./page/page/component";
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import {RouterModule} from '@angular/router';
     HttpClientModule,
     RouterModule,
 
+    MatExpansionModule,
     MatButtonModule,
     MatDatepickerModule,
     MatDividerModule,
@@ -47,6 +49,7 @@ import {RouterModule} from '@angular/router';
     MatCardModule,
     MatMenuModule,
     MatSnackBarModule,
+    MatTabsModule,
     MatTableModule,
   ],
   declarations: [
@@ -54,7 +57,8 @@ import {RouterModule} from '@angular/router';
     LoginPageComponent,
     DefaultPage,
     PostListPageComponent,
-    PostEditPageComponent
+    PostEditPageComponent,
+    PagePageComponent
   ],
   exports: [],
   providers: [

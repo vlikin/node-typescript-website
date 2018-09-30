@@ -109,6 +109,9 @@ export class PostEditPageComponent {
           this.stopProcessing();
           this.item = this.form.getRawValue();
           this.item._id = _id;
+        }, (error) => {
+          this.stopProcessing();
+          this.adminService.showMessage('Some error has occurred!', 'error');
         });
     }
   }

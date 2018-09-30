@@ -31,7 +31,7 @@ export class InitialDataContainer {
     return {
       component: {
         header: parse('yaml/component/header.yaml'),
-        footer: parse('yaml/component/header.yaml')
+        footer: parse('yaml/component/footer.yaml')
       },
       section: {
         aboutMe: parse('yaml/section/about-me.yaml'),

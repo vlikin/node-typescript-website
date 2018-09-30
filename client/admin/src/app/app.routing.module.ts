@@ -6,6 +6,7 @@ import {DashboardPage} from '../shell/page/dashboard/component';
 import {DefaultPage} from '../shell/page/default';
 import {PostListPageComponent} from '../shell/page/post/list';
 import {PostEditPageComponent} from '../shell/page/post/edit';
+import {PagePageComponent} from "../shell/page/page/component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardPage,
+    canActivate: [IsAuthenticatedGuard]
+  },
+  {
+    path: 'page',
+    component: PagePageComponent,
     canActivate: [IsAuthenticatedGuard]
   },
   {

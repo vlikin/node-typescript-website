@@ -4,7 +4,7 @@ import {ShellContainer} from "../../container/shell";
 import {ServerContainer} from "../../container/server";
 import should = require("should");
 import {default as request} from "supertest";
-import {CoreContainer} from "../../container/core";
+  import {CoreContainer} from "../../container/core";
 import {InitialDataContainer} from "../../container/initial-data";
 
 describe('Page routes', () => {

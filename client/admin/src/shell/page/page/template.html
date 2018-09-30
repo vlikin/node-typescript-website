@@ -1,0 +1,295 @@
+<h1>Page unstructual content</h1>
+<div [formGroup]="form" *ngIf="form" class="dmn-form">
+  <div class="actions">
+    <button mat-flat-button color="primary" [disabled]="form.invalid || isProcessing" (click)="save()">Save</button>
+  </div>
+  <h2>Components</h2>
+  <div formGroupName="component">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Header
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div formGroupName="header">
+          <mat-tab-group>
+            <mat-tab [label]="language.title" *ngFor="let language of languages">
+              <div [formGroupName]="language.key">
+                <div formGroupName="lang" class="full-width-container">
+                  <h3>Language</h3>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="en" placeholder="English">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="ru" placeholder="Russian">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="uk" placeholder="Ukrainian">
+                  </mat-form-field>
+                </div>
+                <div formGroupName="menu" class="full-width-container">
+                  <h3>Menu</h3>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="aboutMe" placeholder="About">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="blog" placeholder="Blog">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="contact" placeholder="Contact">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="home" placeholder="Home">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="resume" placeholder="Resume">
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Footer
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div formGroupName="footer">
+          <mat-tab-group>
+            <mat-tab [label]="language.title" *ngFor="let language of languages">
+              <div [formGroupName]="language.key" class="full-width-container">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="copyright" placeholder="Copyright">
+                </mat-form-field>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <h2>Sections</h2>
+  <div formGroupName="section">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Hero
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div formGroupName="hero">
+          <mat-tab-group>
+            <mat-tab [label]="language.title" *ngFor="let language of languages">
+              <div [formGroupName]="language.key" class="full-width-container">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="fullname" placeholder="Fullname">
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="text" matInput formControlName="position" placeholder="Position">
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="text" matInput formControlName="button" placeholder="Button">
+                </mat-form-field>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            About me
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div formGroupName="aboutMe">
+          <mat-tab-group>
+            <mat-tab [label]="language.title" *ngFor="let language of languages">
+              <div [formGroupName]="language.key" class="full-width-container">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="title" placeholder="Title">
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="text" matInput formControlName="subtitle" placeholder="Subtitle">
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="text" matInput formControlName="personal" placeholder="Personal">
+                </mat-form-field>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Blog
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div formGroupName="blog">
+          <mat-tab-group>
+            <mat-tab [label]="language.title" *ngFor="let language of languages">
+              <div [formGroupName]="language.key" class="full-width-container">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="title" placeholder="Title">
+                </mat-form-field>
+                <div formGroupName="call_to_action" class="full-width-container">
+                  <h3>Call to action</h3>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="title" placeholder="Title">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="href" placeholder="Href">
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Resume
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div formGroupName="resume">
+          <mat-tab-group>
+            <mat-tab [label]="language.title" *ngFor="let language of languages">
+              <div [formGroupName]="language.key" class="full-width-container">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="title" placeholder="Title">
+                </mat-form-field>
+                <div formGroupName="call_to_action" class="full-width-container">
+                  <h3>Call to action</h3>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="title" placeholder="Title">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input type="text" matInput formControlName="href" placeholder="Href">
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Services
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div formGroupName="services">
+          <mat-tab-group>
+            <mat-tab [label]="language.title" *ngFor="let language of languages">
+              <div [formGroupName]="language.key" class="full-width-container">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="title" placeholder="Title">
+                </mat-form-field>
+                <div formGroupName="services">
+                  <div formGroupName="design" class="full-width-container">
+                    <h3>Design</h3>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="title" placeholder="Title">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="content" placeholder="Content">
+                    </mat-form-field>
+                  </div>
+                  <div formGroupName="prototype" class="full-width-container">
+                    <h3>Prototype</h3>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="title" placeholder="Title">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="content" placeholder="Content">
+                    </mat-form-field>
+                  </div>
+                  <div formGroupName="web_app" class="full-width-container">
+                    <h3>Web application</h3>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="title" placeholder="Title">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="content" placeholder="Content">
+                    </mat-form-field>
+                  </div>
+                  <div formGroupName="mobile_app" class="full-width-container">
+                    <h3>Mobile application</h3>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="title" placeholder="Title">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="content" placeholder="Content">
+                    </mat-form-field>
+                  </div>
+                  <div formGroupName="dev_ops" class="full-width-container">
+                    <h3>DevOps</h3>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="title" placeholder="Title">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="content" placeholder="Content">
+                    </mat-form-field>
+                  </div>
+                  <div formGroupName="qa" class="full-width-container">
+                    <h3>QA</h3>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="title" placeholder="Title">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="content" placeholder="Content">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Contact
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div formGroupName="contacts">
+          <mat-tab-group>
+            <mat-tab [label]="language.title" *ngFor="let language of languages">
+              <div [formGroupName]="language.key" class="full-width-container">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="title" placeholder="Title">
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="text" matInput formControlName="subtitle" placeholder="Subtitle">
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="text" matInput formControlName="personal" placeholder="Personal">
+                </mat-form-field>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

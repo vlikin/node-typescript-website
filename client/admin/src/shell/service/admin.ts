@@ -9,6 +9,11 @@ import {MatSnackBar} from '@angular/material';
 })
 export class AdminService {
   token: string;
+  languages = [
+    {key: 'en', title: 'English'},
+    {key: 'ru', title: 'Russian'},
+    {key: 'uk', title: 'Ukrainian'},
+  ];
   private isAuthenticateS: BehaviorSubject<boolean>;
   public isAuthenticatedO: Observable<boolean>;
 
@@ -57,6 +62,14 @@ export class AdminService {
 
   public adminConfigHttp(): Observable<any> {
     return this.http.get('/server/admin/client-config');
+  }
+
+  public adminPageGetHttp(): Observable<any> {
+    return this.http.get('/server/admin/page/get');
+  }
+
+  public adminPageSetHttp(state): Observable<any> {
+    return this.http.post('/server/admin/page/set', {state});
   }
 
   public adminPostListHttp(): Observable<any> {
