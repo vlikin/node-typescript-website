@@ -32,6 +32,7 @@ import {UploadFileAdminRoute} from "./route/admin/upload-file";
 import {InitialDataContainer} from "./container/initial-data";
 import {PageMemento} from "./memento/page";
 import {PageGetAdminRoute, PageSetAdminRoute} from "./route/admin/page.g";
+import {IndexRoute} from "./route";
 
 declare var process: {
   env: {
@@ -108,6 +109,7 @@ export function bootstrapServer(config: IConfig): Container {
   container.bind<ServerContainer>(CType.Server).to(ServerContainer).inSingletonScope();
 
   // Registers routes.
+  container.bind<IRoute>(CType.IRoute).to(IndexRoute);
   container.bind<IRoute>(CType.IRoute).to(TestRoute);
   container.bind<IRoute>(CType.IRoute).to(GetTokenRoute);
 

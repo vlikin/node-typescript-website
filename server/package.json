@@ -9,9 +9,9 @@
     "compile-watch": "tsc -w",
     "cli": "node built/cli.js",
     "server": "node built/server.js",
-    "dev:server": "configFile=../config/dev.js node $NODE_DEBUG_OPTION built/server.js",
-    "dev:cli": "configFile=../config/dev.js node $NODE_DEBUG_OPTION built/cli.js",
-    "dev:cli initial-data": "configFile=../config/dev.js node $NODE_DEBUG_OPTION built/cli.js initial-data"
+    "dev:server": "configFile=../config/dev.js node-dev $NODE_DEBUG_OPTION built/server.js",
+    "dev:cli": "configFile=../config/dev.js node-dev $NODE_DEBUG_OPTION built/cli.js",
+    "dev:cli initial-data": "configFile=../config/dev.js node-dev $NODE_DEBUG_OPTION built/cli.js initial-data"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "jsonwebtoken": "^8.3.0",
     "mocha": "^5.2.0",
     "mongodb": "^3.1.4",
+    "pug": "^2.0.3",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "should": "^13.2.3",
@@ -54,6 +55,7 @@
     "@types/mocha": "^5.2.5",
     "@types/mongodb": "^3.1.4",
     "@types/node": "^10.9.4",
+    "@types/pug": "^2.0.4",
     "@types/rimraf": "^2.0.2",
     "@types/supertest": "^2.0.5",
     "@types/uniqid": "^4.1.2",

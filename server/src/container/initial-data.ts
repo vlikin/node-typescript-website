@@ -36,7 +36,7 @@ export class InitialDataContainer {
       section: {
         aboutMe: parse('yaml/section/about-me.yaml'),
         blog: parse('yaml/section/blog.yaml'),
-        contacts: parse('yaml/section/contact.yaml'),
+        contact: parse('yaml/section/contact.yaml'),
         hero: parse('yaml/section/hero.yaml'),
         resume: parse('yaml/section/resume.yaml'),
         services: parse('yaml/section/services.yaml')

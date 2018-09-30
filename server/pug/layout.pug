@@ -1,0 +1,94 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(
+    name="viewport"
+    content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"
+    )
+    title= pageTitle
+
+    head
+      style(type='text/css').
+        body, html {
+          height: 100%;
+        }
+
+        .app-loading {
+          background: #162337;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+        }
+
+        .app-loading .spinner {
+          height: 200px;
+          width: 200px;
+          width: 200px;
+          animation: rotate 2s linear infinite;
+          transform-origin: center center;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+        }
+
+        .app-loading .spinner .path {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+          animation: dash 1.5s ease-in-out infinite;
+          stroke-linecap: round;
+          stroke: #ddd;
+        }
+
+        @keyframes rotate {
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes dash {
+          0% {
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+          }
+          50% {
+            stroke-dasharray: 89, 200;
+            stroke-dashoffset: -35px;
+          }
+          100% {
+            stroke-dasharray: 89, 200;
+            stroke-dashoffset: -124px;
+          }
+        }
+
+        .app-loading .logo {
+          width: 100px;
+          height: 100px;
+          background: url("/images/logo-loading.png") center center no-repeat;
+          background-size: contain;
+        }
+
+  body
+    div.app-loading
+      div.logo
+      svg.spinner(viewBox="25 25 50 50")
+        circle.path(cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10")
+
+    div#outer-body
+      block body
+        | Body place
+
+block css
+  link(href='../css/style.css', rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css?family=Nothing+You+Could+Do', rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css?family=Play:400,700&subset=latin,cyrillic', rel='stylesheet', type='text/css')
+
+block script
+  script(src='../js/vendor.js')
+  script(src='../js/app.bundle.js')

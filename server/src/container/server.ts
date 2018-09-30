@@ -27,7 +27,6 @@ export class ServerContainer {
     // Rewrites urls that can come from Ng client.
     this.application.all(/\/server(.*)/, (request: Request, response: Response, next: NextFunction) => {
       request.url = request.url.replace(/\/server(.*)/, '$1');
-      console.log(request.url);
       next();
     });
     this.routes.forEach((route: IRouteRegister) => {
