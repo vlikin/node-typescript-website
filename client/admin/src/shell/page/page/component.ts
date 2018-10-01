@@ -67,7 +67,7 @@ export class PagePageComponent implements OnInit {
         blog: this.buildBlogSectionForm(),
         resume: this.buildResumeSectionForm(),
         services: this.buildServicesSectionForm(),
-        contacts: this.buildContactsSectionForm()
+        contact: this.buildContactsSectionForm()
       })
     };
     return this.fb.group(form);
