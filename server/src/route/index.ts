@@ -34,7 +34,7 @@ export class IndexRoute extends AbstractRoute {
 
     let vars = _.merge(options, locals, state);
     let html = pug.renderFile(path.resolve('./pug/index.pug'), vars);
-    response.send(`Hello route ${this.config.server.port} --- ${html}`);
+    response.send(html);
 
     return null;
   }

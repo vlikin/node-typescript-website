@@ -4,6 +4,10 @@ export type IDynamicConfig = {
 
 export type IConfig = {
   secret: string,
+  static: [{
+    path: string,
+    dir: string
+  }],
   server: {
     port: number
   },
