@@ -2,7 +2,8 @@
   "name": "admin",
   "version": "0.0.0",
   "scripts": {
-    "dev": " ng serve -o --proxy-config=proxy.conf.json"
+    "dev": " ng serve -o --proxy-config=proxy.conf.json",
+    "build-aot": "ng build --aot"
   },
   "private": true,
   "dependencies": {

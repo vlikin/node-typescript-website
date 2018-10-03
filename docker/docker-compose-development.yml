@@ -1,0 +1,67 @@
+version: "3.2"
+
+services:
+  db:
+    image: mongo:jessie
+
+  app:
+    build: ./app/.
+    volumes:
+    - yaml:/app/src/yaml:ro
+    - pug:/app/src/pug:ro
+    - server:/app/src/server
+    - client-client:/app/src/client-client:ro
+    - client-admin:/app/src/client-admin:ro
+    - config:/app/config:ro
+
+  server_preparation:
+    build: ./node/.
+    environment:
+      configFile: '../config/docker.js'
+    volumes:
+    - config:/app/config
+    - yaml:/app/yaml
+    - server:/app/server
+    depends_on:
+    - app
+    - db
+    links:
+    - db
+    command: 'node server/cli.js initial-data'
+
+  server:
+    build: node
+    environment:
+      configFile: '../config/docker.js'
+    volumes:
+    - config:/app/config:ro
+    - server:/app/server:ro
+    - pug:/app/pug:ro
+    depends_on:
+    - server_preparation
+    links:
+    - db
+    ports:
+    - "2909:2909"
+    command: 'node server/server.js'
+
+  nginx:
+    build: nginx/.
+    volumes:
+    - client-admin:/app/client-admin:ro
+    - client-client:/app/client-client:ro
+    links:
+    - server
+    depends_on:
+    - server
+    ports:
+    - 80:80
+    - 81:81
+
+volumes:
+  server:
+  yaml:
+  pug:
+  config:
+  client-client:
+  client-admin:

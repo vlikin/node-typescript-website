@@ -2,3 +2,8 @@
 node_modules
 built
 package-lock.json
+client/client/www/css
+client/client/www/js
+docker/app/src
+docker/app/config
+docker/node/package.json
