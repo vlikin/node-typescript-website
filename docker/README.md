@@ -1,114 +1,88 @@
-## Builds
+## Building process
 To make a presentation of changes easily, the project parts are wrapped into containers and a docker compose is configured.
-
-## Tips
-### Remove all volumes
-```
-  docker system prune
-```
-or
-```
-  docker volume prune
-```
-or
-```
- docker volume rm $(docker volume ls -qf dangling=true)
-```
 
 ### Node container.
 This container is a container with project dependencies. This is the base execution layer.
-Attention. Do not forget update server's package.json.
+Attention. Do not forget to update server's package.json.
 ```
   cd node
   cp ../../server/package.json .
   docker build .
 ```
 
-### Compile all sources in the production mode.
-```
-  cd server/
-  npm run compile 
-  cd client/admin
-  npm run build-aot
-  cd client/client
-  npm-run gulp default
-```
-
-### Move compiled sources into a common place.
-```
- mkdir docker/sources
- cp -R server/built docker/sources/server
- cp -R server/pug docker/sources/
- cp -R server/yaml docker/sources/
- cp -R client/admin/dist/admin docker/sources/client-admin
- cp -R client/client/www docker/sources/client-client
-```
-
 ### The application container.
-```
-  cd app
-  cp -R ../sources ./src
-  mkdir config
-  cp ../../server/config/default.js ./config
-  cp ../../server/config/docker.js ./config
-  docker build .
-```
-
-### Server sources.
+#### Compile all sources in the production mode.
+##### Server
 ```
   cd server/
   npm run compile
-  cp -R ./build ../docker/trading_server_src/src
-  cp -R ./configs ../docker/trading_server_src/configs
-  cd ../docker/trading_server_src
-  sudo docker build .
+``` 
+
+##### Admin client
 ```
-Configs have to be reviewed.
-### Trading client sources.
-Before docker building, build sources by angular cli.
+  cd client/admin
+  npm run build-aot
 ```
-  cd client/
-  npm run b-trading:build-aot
-  cp -R ./b-trading-dist ../docker/trading_client_src/src
-  cd ../docker/trading_client_src
-  sudo docker build .
+
+##### Client assets.
 ```
-### Admin client sources.
-Before docker building, build sources by angular cli.
+  cd client/client
+  npm-run gulp default
 ```
-  cd client/
-  npm run admin:build-aot
-  cp -R ./admin-dist ../docker/admin_client_src/src
-  cd ../docker/admin_client_src
-  sudo docker build .
+##### Move compiled sources into a common place.
 ```
-### Up the project using the development compose files.
+ mkdir docker/app/src/
+ cp -R server/built docker/app/src/server
+ cp -R server/pug docker/app/src/
+ cp -R server/yaml docker/app/src/
+ cp -R client/admin/dist/admin docker/sources/client-admin
+ cp -R client/client/www docker/sources/client-client
+```
+##### Move configs.
+```
+  mkdir config
+  cp ../../server/config/default.js ./config
+  cp ../../server/config/docker.js ./config
+```
+##### Build
+```  
+  docker build .
+```
+
+### Nginx container
+```
+  cd nginx
+  docker build . 
+```
+
+## Up the project using the development compose file.
 ```
   docker-compose -f ./docker-compose-developmet.yml up -d
 ```
+
 ### Build and send builds.
 ```
-  sudo docker build . -t vlikin/itp-trading_server_src
-  sudo docker push vlikin/itp-trading_server_src
+  keys = [node, app, nginx]
+  sudo docker build . -t vlikin/ntw-${key}
+  sudo docker push vlikin/ntw--${key}
 ```
-### Deploy
+
+### How to check the presentation version
 #### Install Docker, Docker compose
 ```
   apt install docker.io docker-compose
 ```
-#### Prepare a directory
-```
-  mkdir -p /usr/src/itp
-  cd /usr/src/itp
-```
-#### Upload docker-compose.yml to the server 
-```
-  scp ./docker-compose.yml root@$IP:/docker/itp/
-```
+
 #### Sign in Docker Hub.
 ```
   docker login
 ```
+
+#### Upload docker-compose.yml to the server 
+```
+  wget https://raw.githubusercontent.com/vlikin/node-typescript-website/master/docker/docker-compose-development.yml
+```
+
 #### Up the application
 ```
   docker-compose up -d
