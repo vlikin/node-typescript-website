@@ -1,38 +1,38 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 import {Container} from 'inversify';
-import {ICommand} from "./core/command";
-import {CliContainer} from "./container/cli";
+import {ICommand} from './core/command';
+import {CliContainer} from './container/cli';
 import {
   ChangeAdminPasswordCommand,
   InstallCommand,
   ReinstallCommand,
   UninstallCommand
-} from "./command/index";
+} from './command/index';
 import {ClientConfigAdminRoute} from './route/admin/client-config';
 import {GetTokenRoute} from './route/get-token';
-import {TestRoute} from "./route/test";
-import {IRoute} from "./core/route";
-import {ServerContainer} from "./container/server";
-import {CType, IConfig} from "./declaration";
-import {DbContainer} from "./container/db";
-import {KeyObjDbContainer} from "./container/key-obj-db";
-import {DynamicConfigMemento} from "./memento/dynamic-config";
-import {CoreContainer} from "./container/core";
-import {ShellContainer} from "./container/shell";
-import {PostModel} from "./model/post";
-import {InitialDataCommand} from "./command/initial-data";
+import {TestRoute} from './route/test';
+import {IRoute} from './core/route';
+import {ServerContainer} from './container/server';
+import {CType, IConfig} from './declaration';
+import {DbContainer} from './container/db';
+import {KeyObjDbContainer} from './container/key-obj-db';
+import {DynamicConfigMemento} from './memento/dynamic-config';
+import {CoreContainer} from './container/core';
+import {ShellContainer} from './container/shell';
+import {PostModel} from './model/post';
+import {InitialDataCommand} from './command/initial-data';
 import {
   PostCreateAdminRoute,
   PostDeleteAdminRoute,
   PostGetAdminRoute,
   PostListAdminRoute,
   PostSaveAdminRoute
-} from "./route/admin/post.g";
-import {UploadFileAdminRoute} from "./route/admin/upload-file";
-import {InitialDataContainer} from "./container/initial-data";
-import {PageMemento} from "./memento/page";
-import {PageGetAdminRoute, PageSetAdminRoute} from "./route/admin/page.g";
-import {IndexRoute} from "./route";
+} from './route/admin/post.g';
+import {UploadFileAdminRoute} from './route/admin/upload-file';
+import {InitialDataContainer} from './container/initial-data';
+import {PageMemento} from './memento/page';
+import {PageGetAdminRoute, PageSetAdminRoute} from './route/admin/page.g';
+import {IndexRoute} from './route';
 
 declare var process: {
   env: {

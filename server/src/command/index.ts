@@ -23,21 +23,9 @@ export class InstallCommand extends AbstractCommand {
   }
 
   async command() {
-    console.log('You are going to install the application! It can destroy some data.'.red);
-    const questions = [
-      {
-        type: 'confirm',
-        name: 'continue',
-        message: 'Do you want to continue the application installation?',
-        default: false
-      },
-    ];
-    let answers = await inquirer.prompt<{ continue: boolean }>(questions);
-    if (answers.continue) {
-      await this.shellContainer.install();
-      await this.shellContainer.dispose();
-      console.log('The application has been installed successfully.'.green);
-    }
+    await this.shellContainer.install();
+    await this.shellContainer.dispose();
+    console.log('The application has been installed successfully.'.green);
   }
 }
 
