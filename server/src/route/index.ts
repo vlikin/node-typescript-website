@@ -7,6 +7,7 @@ import _ from 'lodash';
 import * as path from "path";
 import {PageMemento} from "../memento/page";
 import {PostModel} from "../model/post";
+import {ResumeModel} from '../model/resume';
 
 @injectable()
 export class IndexRoute extends AbstractRoute {
@@ -16,6 +17,8 @@ export class IndexRoute extends AbstractRoute {
   private pageMemento!: PageMemento;
   @inject(CType.Content.Post)
   private postModel!: PostModel;
+  @inject(CType.Content.Resume)
+  private resumeModel!: ResumeModel;
 
   constructor() {
     super();
@@ -32,6 +35,8 @@ export class IndexRoute extends AbstractRoute {
     let state = await this.pageMemento.getState();
     let posts = await this.postModel.list();
     state.section.blog.articles = posts;
+    let resumes = await this.resumeModel.list();
+    state.section.resume.position = resumes;
     let options = {};
     let locals = {
       lng: 'en'
