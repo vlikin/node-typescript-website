@@ -6,6 +6,7 @@ import pug from 'pug';
 import _ from 'lodash';
 import * as path from "path";
 import {PageMemento} from "../memento/page";
+import {PostModel} from "../model/post";
 
 @injectable()
 export class IndexRoute extends AbstractRoute {
@@ -13,6 +14,8 @@ export class IndexRoute extends AbstractRoute {
   private config!: IConfig;
   @inject(CType.Memento.Page)
   private pageMemento!: PageMemento;
+  @inject(CType.Content.Post)
+  private postModel!: PostModel;
 
   constructor() {
     super();
@@ -27,6 +30,8 @@ export class IndexRoute extends AbstractRoute {
 
   async router(request: Request, response: Response, next: NextFunction): Promise<any> {
     let state = await this.pageMemento.getState();
+    let posts = await this.postModel.list();
+    state.section.blog.articles = posts;
     let options = {};
     let locals = {
       lng: 'en'
