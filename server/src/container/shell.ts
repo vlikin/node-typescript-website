@@ -5,6 +5,7 @@ import {DbContainer} from './db';
 import {DynamicConfigMemento} from '../memento/dynamic-config';
 import {PostModel} from '../model/post';
 import {CoreContainer} from './core';
+import {ResumeModel} from "../model/resume";
 
 @injectable()
 export class ShellContainer {
@@ -21,6 +22,8 @@ export class ShellContainer {
 
   @inject(CType.Content.Post)
   private postContent!: PostModel;
+  @inject(CType.Content.Resume)
+  private resumeContent!: ResumeModel;
 
   test() {
     return 'ShellContainer-test';
@@ -37,6 +40,7 @@ export class ShellContainer {
 
     // Content.
     await this.postContent.install();
+    await this.resumeContent.install();
   }
 
   async uninstall() {
@@ -44,6 +48,7 @@ export class ShellContainer {
 
     // Content.
     await this.postContent.uninstall();
+    await this.resumeContent.uninstall();
 
     await this.coreContainer.uninstall();
   }

@@ -27,6 +27,8 @@ import {AdminService} from './service/admin';
 import {PostEditPageComponent} from './page/post/edit';
 import {RouterModule} from '@angular/router';
 import {PagePageComponent} from "./page/page/component";
+import {ResumeListPageComponent} from './page/resume/list';
+import {ResumeEditPageComponent} from './page/resume/edit';
 
 @NgModule({
   imports: [
@@ -58,6 +60,8 @@ import {PagePageComponent} from "./page/page/component";
     DefaultPage,
     PostListPageComponent,
     PostEditPageComponent,
+    ResumeListPageComponent,
+    ResumeEditPageComponent,
     PagePageComponent
   ],
   exports: [],

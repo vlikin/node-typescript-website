@@ -92,6 +92,26 @@ export class AdminService {
     return this.http.post('/server/admin/post/save', {item});
   }
 
+  public adminResumeListHttp(): Observable<any> {
+    return this.http.get('/server/admin/resume/list');
+  }
+
+  public adminResumeGetHttp(_id: string): Observable<any> {
+    return this.http.post('/server/admin/resume/get', {_id});
+  }
+
+  public adminResumeDeleteHttp(_id: string): Observable<any> {
+    return this.http.post('/server/admin/resume/delete', {_id});
+  }
+
+  public adminResumeCreateHttp(item): Observable<any> {
+    return this.http.post('/server/admin/resume/create', {item});
+  }
+
+  public adminResumeSaveHttp(item): Observable<any> {
+    return this.http.post('/server/admin/resume/save', {item});
+  }
+
   login(token) {
     this.token = token;
     this.writeToken(token);

@@ -3,7 +3,7 @@ import {AbstractCommand} from '../core/command';
 import {CType} from '../declaration';
 import {ShellContainer} from '../container/shell';
 import 'colors';
-import {InitialDataContainer} from "../container/initial-data";
+import {InitialDataContainer} from '../container/initial-data';
 
 @injectable()
 export class InitialDataCommand extends AbstractCommand {
@@ -23,6 +23,6 @@ export class InitialDataCommand extends AbstractCommand {
   async command(env: any, options: any): Promise<void> {
     await this.initialDataContainer.migrate('.');
     await this.shellContainer.dispose();
-    console.log('Posts have been migrated!'.red);
+    console.log('Initial data have been migrated!'.green);
   }
 }
