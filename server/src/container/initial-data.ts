@@ -6,6 +6,7 @@ import fs from 'fs';
 import * as path from 'path';
 import {PageMemento} from '../memento/page';
 import _ from 'lodash';
+import {IResumeData, ResumeModel} from '../model/resume';
 
 @injectable()
 export class InitialDataContainer {
@@ -13,6 +14,8 @@ export class InitialDataContainer {
   private config!: IConfig;
   @inject(CType.Content.Post)
   private postModel!: PostModel;
+  @inject(CType.Content.Resume)
+  private resumeModel!: ResumeModel;
   @inject(CType.Memento.Page)
   private pageMemento!: PageMemento;
 
@@ -73,9 +76,30 @@ export class InitialDataContainer {
     }
   }
 
+  async migrateResumes(doc: any): Promise<void> {
+    doc['ua'] = doc['uk'];
+    delete doc['uk'];
+    let resumes: IResumeData[] = [];
+
+    _.forEach(doc['en']['position'], (value: any, key: any) => {
+      let resume: IResumeData = {
+        translations: {}
+      };
+      this.config.languages.forEach((language) => {
+        let oldResume = doc[language]['position'][key];
+        resume.translations[language] = oldResume
+      });
+      resumes.push(resume);
+    });
+    for (let resume of resumes) {
+      await this.resumeModel.create(resume)
+    }
+  }
+
   async migrate(basePath='.'): Promise<void> {
     let doc = this.getInitialData(basePath);
     await this.migrateUnstructualParts(doc);
     await this.migratePosts(doc.section.blog);
+    await this.migrateResumes(doc.section.resume);
   }
 }

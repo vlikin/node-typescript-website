@@ -33,6 +33,13 @@ import {InitialDataContainer} from './container/initial-data';
 import {PageMemento} from './memento/page';
 import {PageGetAdminRoute, PageSetAdminRoute} from './route/admin/page.g';
 import {IndexRoute} from './route';
+import {ResumeModel} from "./model/resume";
+import {
+  ResumeCreateAdminRoute,
+  ResumeDeleteAdminRoute, ResumeGetAdminRoute,
+  ResumeListAdminRoute,
+  ResumeSaveAdminRoute
+} from "./route/admin/resume.g";
 
 declare var process: {
   env: {
@@ -76,6 +83,7 @@ export function bootstrapShell(config: IConfig): Container {
 
   container.bind<PageMemento>(CType.Memento.Page).to(PageMemento).inSingletonScope();
   container.bind<PostModel>(CType.Content.Post).to(PostModel).inSingletonScope();
+  container.bind<ResumeModel>(CType.Content.Resume).to(ResumeModel).inSingletonScope();
   container.bind<ShellContainer>(CType.Shell).to(ShellContainer).inSingletonScope();
   container.bind<InitialDataContainer>(CType.InitialData).to(InitialDataContainer).inSingletonScope();
 
@@ -121,6 +129,13 @@ export function bootstrapServer(config: IConfig): Container {
   container.bind<IRoute>(CType.IRoute).to(PostSaveAdminRoute);
   container.bind<IRoute>(CType.IRoute).to(PostGetAdminRoute);
   container.bind<IRoute>(CType.IRoute).to(PostDeleteAdminRoute);
+
+  container.bind<IRoute>(CType.IRoute).to(ResumeListAdminRoute);
+  container.bind<IRoute>(CType.IRoute).to(ResumeCreateAdminRoute);
+  container.bind<IRoute>(CType.IRoute).to(ResumeSaveAdminRoute);
+  container.bind<IRoute>(CType.IRoute).to(ResumeGetAdminRoute);
+  container.bind<IRoute>(CType.IRoute).to(ResumeDeleteAdminRoute);
+
 
   container.bind<IRoute>(CType.IRoute).to(PageGetAdminRoute);
   container.bind<IRoute>(CType.IRoute).to(PageSetAdminRoute);

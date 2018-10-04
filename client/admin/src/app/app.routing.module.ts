@@ -6,7 +6,9 @@ import {DashboardPage} from '../shell/page/dashboard/component';
 import {DefaultPage} from '../shell/page/default';
 import {PostListPageComponent} from '../shell/page/post/list';
 import {PostEditPageComponent} from '../shell/page/post/edit';
-import {PagePageComponent} from "../shell/page/page/component";
+import {PagePageComponent} from '../shell/page/page/component';
+import {ResumeEditPageComponent} from '../shell/page/resume/edit';
+import {ResumeListPageComponent} from '../shell/page/resume/list';
 
 const routes: Routes = [
   {
@@ -35,6 +37,16 @@ const routes: Routes = [
   {
     path: 'post/edit/:_id',
     component: PostEditPageComponent,
+    canActivate: [IsAuthenticatedGuard]
+  },
+  {
+    path: 'resume/list',
+    component: ResumeListPageComponent,
+    canActivate: [IsAuthenticatedGuard]
+  },
+  {
+    path: 'resume/edit/:_id',
+    component: ResumeEditPageComponent,
     canActivate: [IsAuthenticatedGuard]
   }
 ];

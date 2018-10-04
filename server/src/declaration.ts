@@ -57,6 +57,7 @@ export const CType = {
     Page: Symbol.for('Page')
   },
   Content: {
-    Post: Symbol.for('Content')
+    Post: Symbol.for('Content'),
+    Resume: Symbol.for('Resume')
   }
 };
