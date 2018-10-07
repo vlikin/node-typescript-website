@@ -19,14 +19,14 @@ import {
   MatDividerModule, MatExpansionModule, MatTabsModule
 } from '@angular/material';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { DashboardPage } from './page/dashboard/component';
+import { DashboardPageComponent } from './page/dashboard/component';
 import {AuthenticationInterceptor} from './authentication.interceptor';
 import {DefaultPage} from './page/default';
 import {PostListPageComponent} from './page/post/list';
 import {AdminService} from './service/admin';
 import {PostEditPageComponent} from './page/post/edit';
 import {RouterModule} from '@angular/router';
-import {PagePageComponent} from "./page/page/component";
+import {PagePageComponent} from './page/page/component';
 import {ResumeListPageComponent} from './page/resume/list';
 import {ResumeEditPageComponent} from './page/resume/edit';
 
@@ -55,7 +55,7 @@ import {ResumeEditPageComponent} from './page/resume/edit';
     MatTableModule,
   ],
   declarations: [
-    DashboardPage,
+    DashboardPageComponent,
     LoginPageComponent,
     DefaultPage,
     PostListPageComponent,

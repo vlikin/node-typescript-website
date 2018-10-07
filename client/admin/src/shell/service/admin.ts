@@ -48,8 +48,8 @@ export class AdminService {
     return this.token;
   }
 
-  public tryLogin(password: string, force=false): Observable<boolean> {
-    if (!force && this.isAuthenticated()) return of(true);
+  public tryLogin(password: string, force= false): Observable<boolean> {
+    if (!force && this.isAuthenticated()) { return of(true); }
     return this.http.post('/server/get-token', {password}).pipe(
       tap((data: {token?: string, message?: string}) => {
         this.login(data.token);
@@ -118,9 +118,9 @@ export class AdminService {
     this.isAuthenticateS.next(this.isAuthenticated());
   }
 
-  public showMessage(message: string, action='info') {
+  public showMessage(message: string, action= 'info') {
     this.snackBar.open(message, action, {
       duration: 2000
-    })
+    });
   }
 }

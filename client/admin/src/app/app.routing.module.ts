@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginPageComponent} from '../shell/page/login/component';
 import {IsAuthenticatedGuard} from '../shell/is-authenticated.guard';
-import {DashboardPage} from '../shell/page/dashboard/component';
+import {DashboardPageComponent} from '../shell/page/dashboard/component';
 import {DefaultPage} from '../shell/page/default';
 import {PostListPageComponent} from '../shell/page/post/list';
 import {PostEditPageComponent} from '../shell/page/post/edit';
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardPage,
+    component: DashboardPageComponent,
     canActivate: [IsAuthenticatedGuard]
   },
   {

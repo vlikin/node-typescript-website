@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {Observable} from "rxjs";
-import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import {map} from "rxjs/operators";
-import {Router} from "@angular/router";
-import {AdminService} from "../../../shell/service/admin";
+import {Observable} from 'rxjs';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {map} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {AdminService} from '../../../shell/service/admin';
 
 @Component({
   selector: 'dmn-root',
