@@ -42,7 +42,7 @@ describe('Page routes', () => {
 
   it('Set', async () => {
     let value = 'Value has been changed';
-    state.component.header.en.menu.home = value;
+    state.component.header.translations.en.menu.home = value;
     await request(app)
       .post('/admin/page/set')
       .send({state})
@@ -54,7 +54,7 @@ describe('Page routes', () => {
       .set('Authentication', `bearer ${authToken}`)
       .expect(200);
     state = response.body.state;
-    should(state.component.header.en.menu.home).equal(value);
+    should(state.component.header.translations.en.menu.home).equal(value);
   });
 
   after(async () => {

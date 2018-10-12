@@ -8,14 +8,12 @@
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Header
-          </mat-panel-title>
+          <mat-panel-title>Header</mat-panel-title>
           <mat-panel-description>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div formGroupName="header">
-          <mat-tab-group>
+          <mat-tab-group formGroupName="translations">
             <mat-tab [label]="language.title" *ngFor="let language of languages">
               <div [formGroupName]="language.key">
                 <div formGroupName="lang" class="full-width-container">
@@ -55,14 +53,12 @@
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Footer
-          </mat-panel-title>
+          <mat-panel-title>Footer</mat-panel-title>
           <mat-panel-description>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div formGroupName="footer">
-          <mat-tab-group>
+          <mat-tab-group formGroupName="translations">
             <mat-tab [label]="language.title" *ngFor="let language of languages">
               <div [formGroupName]="language.key" class="full-width-container">
                 <mat-form-field>
@@ -80,14 +76,13 @@
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Hero
-          </mat-panel-title>
+          <mat-panel-title>Hero</mat-panel-title>
           <mat-panel-description>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div formGroupName="hero">
-          <mat-tab-group>
+          <app-shll-upload-control-component formControlName="image"></app-shll-upload-control-component>
+          <mat-tab-group formGroupName="translations">
             <mat-tab [label]="language.title" *ngFor="let language of languages">
               <div [formGroupName]="language.key" class="full-width-container">
                 <mat-form-field>
@@ -106,14 +101,12 @@
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            About me
-          </mat-panel-title>
+          <mat-panel-title>About me</mat-panel-title>
           <mat-panel-description>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div formGroupName="aboutMe">
-          <mat-tab-group>
+          <mat-tab-group formGroupName="translations">
             <mat-tab [label]="language.title" *ngFor="let language of languages">
               <div [formGroupName]="language.key" class="full-width-container">
                 <mat-form-field>
@@ -132,14 +125,12 @@
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Blog
-          </mat-panel-title>
+          <mat-panel-title>Blog</mat-panel-title>
           <mat-panel-description>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div formGroupName="blog">
-          <mat-tab-group>
+          <mat-tab-group formGroupName="translations">
             <mat-tab [label]="language.title" *ngFor="let language of languages">
               <div [formGroupName]="language.key" class="full-width-container">
                 <mat-form-field>
@@ -161,14 +152,12 @@
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Resume
-          </mat-panel-title>
+          <mat-panel-title>Resume</mat-panel-title>
           <mat-panel-description>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div formGroupName="resume">
-          <mat-tab-group>
+          <mat-tab-group formGroupName="translations">
             <mat-tab [label]="language.title" *ngFor="let language of languages">
               <div [formGroupName]="language.key" class="full-width-container">
                 <mat-form-field>
@@ -190,14 +179,12 @@
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Services
-          </mat-panel-title>
+          <mat-panel-title>Services</mat-panel-title>
           <mat-panel-description>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div formGroupName="services">
-          <mat-tab-group>
+          <mat-tab-group formGroupName="translations">
             <mat-tab [label]="language.title" *ngFor="let language of languages">
               <div [formGroupName]="language.key" class="full-width-container">
                 <mat-form-field>
@@ -266,14 +253,12 @@
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            Contact
-          </mat-panel-title>
+          <mat-panel-title>Contact</mat-panel-title>
           <mat-panel-description>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div formGroupName="contact">
-          <mat-tab-group>
+          <mat-tab-group formGroupName="translations">
             <mat-tab [label]="language.title" *ngFor="let language of languages">
               <div [formGroupName]="language.key" class="full-width-container">
                 <mat-form-field>

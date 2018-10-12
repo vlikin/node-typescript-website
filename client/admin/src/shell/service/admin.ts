@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {mergeMap, tap} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material';
@@ -110,6 +110,15 @@ export class AdminService {
 
   public adminResumeSaveHttp(item): Observable<any> {
     return this.http.post('/server/admin/resume/save', {item});
+  }
+
+  public uploadFile(file): Observable<HttpEvent<any>> {
+    const formData = new FormData();
+    formData.append('document', file);
+    const uploadReq = new HttpRequest('POST', `/server/admin/upload-file`, formData, {
+      reportProgress: true,
+    });
+    return this.http.request(uploadReq);
   }
 
   login(token) {

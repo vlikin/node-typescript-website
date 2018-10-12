@@ -16,7 +16,7 @@ validator.attributes.dateObject = (instance:any, schema: Schema, options: Option
 export const schemaRules = {
   simpleString: {
     type: 'string',
-    maxLengtth: 40
+    maxLengtth: 255
   },
   mongoId: {
     type: 'string',
