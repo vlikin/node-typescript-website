@@ -49,6 +49,7 @@ export class PagePageComponent implements OnInit {
   ngOnInit(): void {
     this.adminService.adminPageGetHttp()
       .subscribe(({state}) => {
+        console.log(state);
         this.state = state;
         this.form.patchValue(this.state);
         console.log(this.state);
@@ -92,7 +93,9 @@ export class PagePageComponent implements OnInit {
       });
     });
 
-    return this.fb.group(translations);
+    return this.fb.group({
+      translations: this.fb.group(translations)
+    });
   }
 
   buildFooterComponentForm(): any {
@@ -103,7 +106,9 @@ export class PagePageComponent implements OnInit {
       });
     });
 
-    return this.fb.group(translations);
+    return this.fb.group({
+      translations: this.fb.group(translations)
+    });
   }
 
   buildAboutMeSectionForm(): any {
@@ -117,7 +122,9 @@ export class PagePageComponent implements OnInit {
       });
     });
 
-    return this.fb.group(translations);
+    return this.fb.group({
+      translations: this.fb.group(translations)
+    });
   }
 
   buildBlogSectionForm(): any {
@@ -132,7 +139,9 @@ export class PagePageComponent implements OnInit {
       });
     });
 
-    return this.fb.group(translations);
+    return this.fb.group({
+      translations: this.fb.group(translations)
+    });
   }
 
   buildResumeSectionForm(): any {
@@ -147,7 +156,9 @@ export class PagePageComponent implements OnInit {
       });
     });
 
-    return this.fb.group(translations);
+    return this.fb.group({
+      translations: this.fb.group(translations)
+    });
   }
 
   buildServicesSectionForm(): any {
@@ -184,7 +195,9 @@ export class PagePageComponent implements OnInit {
       });
     });
 
-    return this.fb.group(translations);
+    return this.fb.group({
+      translations: this.fb.group(translations)
+    });
   }
 
   buildHeroSectionForm(): any {
@@ -197,7 +210,10 @@ export class PagePageComponent implements OnInit {
       });
     });
 
-    return this.fb.group(translations);
+    return this.fb.group({
+      image: [''],
+      translations: this.fb.group(translations)
+    });
   }
 
   buildContactsSectionForm(): any {
@@ -210,7 +226,9 @@ export class PagePageComponent implements OnInit {
       });
     });
 
-    return this.fb.group(translations);
+    return this.fb.group({
+      translations: this.fb.group(translations)
+    });
   }
 
 }

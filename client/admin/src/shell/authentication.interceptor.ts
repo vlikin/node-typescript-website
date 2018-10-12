@@ -1,7 +1,7 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Injectable} from "@angular/core";
-import {AdminService} from "./service/admin";
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {AdminService} from './service/admin';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
@@ -13,8 +13,8 @@ export class AuthenticationInterceptor implements HttpInterceptor {
     if (!this.adminService.isAuthenticated()) {
       return next.handle(req);
     }
-    let token = this.adminService.getToken();
-    let headers = req.headers.set('Authentication', 'bearer ' + token);
+    const token = this.adminService.getToken();
+    const headers = req.headers.set('Authentication', 'bearer ' + token);
     const authenticationRequest = req.clone({headers});
 
     return next.handle(authenticationRequest);

@@ -29,8 +29,7 @@ export class LoginPageComponent implements OnInit {
           if (isAuthenticated) {
             this.adminService.showMessage('The admin has been authenticated successfully!');
             this.router.navigate(['/dashboard']);
-          }
-          else {
+          } else {
             this.adminService.showMessage('Wrong authentication data', 'error');
           }
           this.isProcessing = false;

@@ -32,7 +32,7 @@ export class IndexRoute extends AbstractRoute {
   }
 
   async router(request: Request, response: Response, next: NextFunction): Promise<any> {
-    let state = await this.pageMemento.getState();
+    let state: any = await this.pageMemento.getState();
     let posts = await this.postModel.list();
     state.section.blog.articles = posts;
     let resumes = await this.resumeModel.list();

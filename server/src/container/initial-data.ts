@@ -47,8 +47,41 @@ export class InitialDataContainer {
     };
   }
 
-  async migrateUnstructualParts(doc: any): Promise<void> {
-    let state = _.cloneDeep(doc);
+  async migrateUnstructualParts(_doc: any): Promise<void> {
+    let doc = _.cloneDeep(_doc);
+    let state = {
+      component: {
+        header: {
+          translations: doc.component.header
+        },
+        footer: {
+          translations: doc.component.footer
+        }
+      },
+      section: {
+        hero: {
+          image: 'default.jpg',
+          translations: doc.section.hero
+        },
+        aboutMe: {
+          image: 'default.jpg',
+          translations: doc.section.aboutMe
+        },
+        blog: {
+          translations: doc.section.blog
+        },
+        contact: {
+          translations: doc.section.contact
+        },
+        resume: {
+          translations: doc.section.resume
+        },
+        services: {
+          translations: doc.section.services
+        },
+      }
+    };
+
     await this.pageMemento.setState(state);
   }
 

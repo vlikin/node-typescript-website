@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import {CType, IConfig, IInstallable, ITokenData} from "../declaration";
 import * as path from "path";
 import * as fs from 'fs';
+import _ from 'lodash';
 import rimraf = require("rimraf");
 
 
@@ -33,6 +34,24 @@ export class CoreContainer implements IInstallable {
 
   getAppRootDir() {
     return path.resolve(path.join(__dirname, '..'))
+  }
+
+  processSchemaProperty(property: any) {
+    _.forEach(property.properties, (property) => {
+      if (property.type == 'object') this.processSchemaProperty(property);
+      if (property.type == 'multi-lang') {
+        let properties: {[k: string]: any} = {};
+        this.config.languages.forEach((key) => {
+          properties[key] = {
+            type: 'object',
+            properties: property.properties
+          }
+        });
+
+        property.type = 'object';
+        property.properties = properties;
+      }
+    })
   }
 
   getFileStorageDir() {

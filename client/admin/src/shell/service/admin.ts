@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {mergeMap, tap} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material';
@@ -48,8 +48,8 @@ export class AdminService {
     return this.token;
   }
 
-  public tryLogin(password: string, force=false): Observable<boolean> {
-    if (!force && this.isAuthenticated()) return of(true);
+  public tryLogin(password: string, force= false): Observable<boolean> {
+    if (!force && this.isAuthenticated()) { return of(true); }
     return this.http.post('/server/get-token', {password}).pipe(
       tap((data: {token?: string, message?: string}) => {
         this.login(data.token);
@@ -112,15 +112,24 @@ export class AdminService {
     return this.http.post('/server/admin/resume/save', {item});
   }
 
+  public uploadFile(file): Observable<HttpEvent<any>> {
+    const formData = new FormData();
+    formData.append('document', file);
+    const uploadReq = new HttpRequest('POST', `/server/admin/upload-file`, formData, {
+      reportProgress: true,
+    });
+    return this.http.request(uploadReq);
+  }
+
   login(token) {
     this.token = token;
     this.writeToken(token);
     this.isAuthenticateS.next(this.isAuthenticated());
   }
 
-  public showMessage(message: string, action='info') {
+  public showMessage(message: string, action= 'info') {
     this.snackBar.open(message, action, {
       duration: 2000
-    })
+    });
   }
 }
