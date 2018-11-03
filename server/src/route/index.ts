@@ -26,7 +26,7 @@ export class IndexRoute extends AbstractRoute {
 
   info(): IRouteInfo {
     return {
-      path: '/',
+      path: ['/', '/:lang([a-z]{2}$)?'],
       method: EMethod.get
     }
   }
@@ -39,7 +39,7 @@ export class IndexRoute extends AbstractRoute {
     state.section.resume.position = resumes;
     let options = {};
     let locals = {
-      lng: 'en'
+      lng: request.params.lang || 'en'
     };
 
     let vars = _.merge(options, locals, state);
