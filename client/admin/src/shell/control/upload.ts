@@ -75,6 +75,7 @@ export class UploadControlComponent implements ControlValueAccessor, Validator {
           this.progress = null;
           this.writeValue(httpEvent.body['fileName']);
           this.propagateChange(this.value);
+          this.isToChange = false;
         }
       });
   }

@@ -4,9 +4,11 @@ import jwt from 'jsonwebtoken';
 import {CType, IConfig, IInstallable, ITokenData} from "../declaration";
 import * as path from "path";
 import * as fs from 'fs';
+import * as fse from 'fs-extra';
 import _ from 'lodash';
 import rimraf = require("rimraf");
-
+import {UploadedFile} from 'express-fileupload';
+import uniqId from 'uniqid';
 
 @injectable()
 export class CoreContainer implements IInstallable {
@@ -34,6 +36,29 @@ export class CoreContainer implements IInstallable {
 
   getAppRootDir() {
     return path.resolve(path.join(__dirname, '..'))
+  }
+
+  moveFileToStorage(filePath: string, copy=false): string {
+    let ext = path.extname(filePath);
+    let _uniqId = uniqId();
+    let fileName = `${_uniqId}${ext}`;
+    let destinationPath = path.join(
+      this.getFileStorageDir(),
+      fileName
+    );
+    if (copy) {
+      fse.copyFileSync(
+        filePath,
+        destinationPath
+      );
+    } else {
+      fse.moveSync(
+        filePath,
+        destinationPath
+      );
+    }
+
+    return fileName;
   }
 
   processSchemaProperty(property: any) {

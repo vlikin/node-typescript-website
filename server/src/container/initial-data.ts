@@ -7,11 +7,14 @@ import * as path from 'path';
 import {PageMemento} from '../memento/page';
 import _ from 'lodash';
 import {IResumeData, ResumeModel} from '../model/resume';
+import {CoreContainer} from './core';
 
 @injectable()
 export class InitialDataContainer {
   @inject(CType.Config)
   private config!: IConfig;
+  @inject(CType.Core)
+  private coreContainer!: CoreContainer;
   @inject(CType.Content.Post)
   private postModel!: PostModel;
   @inject(CType.Content.Resume)
@@ -33,21 +36,23 @@ export class InitialDataContainer {
 
     return {
       component: {
-        header: parse('yaml/component/header.yaml'),
-        footer: parse('yaml/component/footer.yaml')
+        header: parse('initial-data/yaml/component/header.yaml'),
+        footer: parse('initial-data/yaml/component/footer.yaml')
       },
       section: {
-        aboutMe: parse('yaml/section/about-me.yaml'),
-        blog: parse('yaml/section/blog.yaml'),
-        contact: parse('yaml/section/contact.yaml'),
-        hero: parse('yaml/section/hero.yaml'),
-        resume: parse('yaml/section/resume.yaml'),
-        services: parse('yaml/section/services.yaml')
+        aboutMe: parse('initial-data/yaml/section/about-me.yaml'),
+        blog: parse('initial-data/yaml/section/blog.yaml'),
+        contact: parse('initial-data/yaml/section/contact.yaml'),
+        hero: parse('initial-data/yaml/section/hero.yaml'),
+        resume: parse('initial-data/yaml/section/resume.yaml'),
+        services: parse('initial-data/yaml/section/services.yaml')
       }
     };
   }
 
   async migrateUnstructualParts(_doc: any): Promise<void> {
+    let aboutMeImagePath = this.coreContainer.moveFileToStorage('initial-data/images/viktor-snow.jpg', true);
+
     let doc = _.cloneDeep(_doc);
     let state = {
       component: {
@@ -64,7 +69,7 @@ export class InitialDataContainer {
           translations: doc.section.hero
         },
         aboutMe: {
-          image: 'default.jpg',
+          image: aboutMeImagePath,
           translations: doc.section.aboutMe
         },
         blog: {
