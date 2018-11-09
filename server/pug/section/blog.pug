@@ -1,8 +1,8 @@
-h1.center-align= section.blog[lng].title
+h1.center-align= section.blog.translations[lng].title
 div.container
   ul.collection
-    for article in section.blog[lng].articles
+    for article in section.blog.translations[lng].articles
       li.collection-item
         a(href=article.href)= article.title
 div.center-align
-  a.waves-effect.waves-light.btn-large(href='section.blog[lng].call_to_action.href')= section.blog[lng].call_to_action.title
+  a.waves-effect.waves-light.btn-large(href='section.blog.translations[lng].call_to_action.href')= section.blog.translations[lng].call_to_action.title

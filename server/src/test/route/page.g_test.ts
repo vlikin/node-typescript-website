@@ -6,6 +6,7 @@ import should = require("should");
 import {default as request} from "supertest";
   import {CoreContainer} from "../../container/core";
 import {InitialDataContainer} from "../../container/initial-data";
+import cheerio from 'cheerio';
 
 describe('Page routes', () => {
   const config = resolveConfig();
@@ -27,8 +28,28 @@ describe('Page routes', () => {
     await initialDataContainer.migrate('.');
   });
 
-  it('Test', () => {
-    should('test').equal('test');
+  describe('Index multilingual page', () => {
+    it('Default', async () => {
+      let response = await request(app)
+        .get('/')
+        .set('Authentication', `bearer ${authToken}`)
+        .expect(200);
+      let doc = cheerio.load(response.text);
+      let d = doc('.section.hero .card-title');
+      state = response.body.state;
+      should(d.text()).equal('Viktor Shelepen');
+    });
+
+    it('Ukrainian', async () => {
+      let response = await request(app)
+        .get('/uk')
+        .set('Authentication', `bearer ${authToken}`)
+        .expect(200);
+      let doc = cheerio.load(response.text);
+      let d = doc('.section.hero .card-title');
+      state = response.body.state;
+      should(d.text()).equal('Віктор Шелепень');
+    });
   });
 
   it('Get', async () => {

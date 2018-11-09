@@ -11,7 +11,7 @@ export enum EMethod {
 }
 
 export interface IRouteInfo {
-  path: string,
+  path: string | string[],
   method?: EMethod,
   schema?: object
 }

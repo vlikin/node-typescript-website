@@ -1,8 +1,8 @@
 div.container
   div.col.m12
-    h1.center-align= section.services[lng].title
+    h1.center-align= section.services.translations[lng].title
   div.row
-    each service, key in section.services[lng].services
+    each service, key in section.services.translations[lng].services
       div.col.s12.m4.l4
         div.card.hoverable
           div.card-image.waves-effect.waves-block.waves-light
