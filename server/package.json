@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
     "compile-watch": "tsc -w",
+    "tslint": "tslint -c ./tslint.json 'src/**/*.ts'",
     "cli": "node built/cli.js",
     "server": "node built/server.js",
     "dev:server": "configFile=../config/dev.js node-dev $NODE_DEBUG_OPTION built/server.js",
@@ -66,6 +67,8 @@
     "cheerio": "^1.0.0-rc.2",
     "lodash": "^4.17.10",
     "supertest": "^3.3.0",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^8.0.1",
     "typescript": "^3.0.3"
   }
 }

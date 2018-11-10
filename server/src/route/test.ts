@@ -1,18 +1,18 @@
-import {inject, injectable} from "inversify";
-import {AbstractRoute, EMethod, IRouteInfo} from "../core/route";
-import {CType, IConfig} from "../declaration";
-import {NextFunction, Request, Response} from "express";
+import { inject, injectable } from 'inversify'
+import { AbstractRoute, EMethod, IRouteInfo } from '../core/route'
+import { CType, IConfig } from '../declaration'
+import { NextFunction, Request, Response } from 'express'
 
 @injectable()
 export class TestRoute extends AbstractRoute {
   @inject(CType.Config)
-  private config!: IConfig;
+  private config!: IConfig
 
-  constructor() {
-    super();
+  constructor () {
+    super()
   }
 
-  info(): IRouteInfo {
+  info (): IRouteInfo {
     return {
       path: '/test',
       method: EMethod.post,
@@ -28,7 +28,7 @@ export class TestRoute extends AbstractRoute {
     }
   }
 
-  router(request: Request, response: Response, next: NextFunction): any {
-    response.send(`Hello route ${this.config.server.port}`);
+  router (request: Request, response: Response, next: NextFunction): any {
+    response.send(`Hello route ${this.config.server.port}`)
   }
 }

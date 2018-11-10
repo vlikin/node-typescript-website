@@ -1,7 +1,7 @@
-import {inject, injectable} from 'inversify';
-import {BaseMemento, KeyObjDbContainer} from '../container/key-obj-db';
-import {CType} from '../declaration';
-import {schemaRules} from '../validator';
+import { inject, injectable } from 'inversify'
+import { BaseMemento, KeyObjDbContainer } from '../container/key-obj-db'
+import { CType } from '../declaration'
+import { schemaRules } from '../validator'
 
 export interface IPageState {
   component: {
@@ -50,7 +50,7 @@ export interface IPageState {
           title: string,
           subtitle: string,
           personal: string,
-          professional: string,
+          professional: string
         }
       }
     },
@@ -121,7 +121,7 @@ export const PageSchema = {
                     blog: schemaRules.simpleString,
                     resume: schemaRules.simpleString,
                     services: schemaRules.simpleString,
-                    contact: schemaRules.simpleString,
+                    contact: schemaRules.simpleString
                   }
                 },
                 lang: {
@@ -129,7 +129,7 @@ export const PageSchema = {
                   properties: {
                     en: schemaRules.simpleString,
                     ru: schemaRules.simpleString,
-                    uk: schemaRules.simpleString,
+                    uk: schemaRules.simpleString
                   }
                 }
               }
@@ -144,9 +144,9 @@ export const PageSchema = {
               properties: {
                 copyright: schemaRules.simpleString
               }
-            },
+            }
           }
-        },
+        }
       }
     },
     section: {
@@ -166,7 +166,7 @@ export const PageSchema = {
                 personal: schemaRules.simpleString,
                 professional: schemaRules.simpleString
               }
-            },
+            }
           }
         },
         aboutMe: {
@@ -183,7 +183,7 @@ export const PageSchema = {
                 personal: schemaRules.simpleString,
                 professional: schemaRules.simpleString
               }
-            },
+            }
           }
         },
         blog: {
@@ -196,11 +196,11 @@ export const PageSchema = {
                 type: 'object',
                 properties: {
                   title: schemaRules.simpleString,
-                  href: schemaRules.simpleString,
+                  href: schemaRules.simpleString
                 }
               }
             }
-          },
+          }
         },
         resume: {
           type: 'object',
@@ -212,11 +212,11 @@ export const PageSchema = {
                 type: 'object',
                 properties: {
                   title: schemaRules.simpleString,
-                  href: schemaRules.simpleString,
+                  href: schemaRules.simpleString
                 }
               }
             }
-          },
+          }
         },
         services: {
           type: 'object',
@@ -227,7 +227,7 @@ export const PageSchema = {
                 title: schemaRules.simpleString,
                 content: schemaRules.simpleString
               }
-            },
+            }
           }
         },
         contact: {
@@ -240,25 +240,25 @@ export const PageSchema = {
                 subtitle: schemaRules.simpleString,
                 personal: schemaRules.simpleString
               }
-            },
+            }
           }
-        },
+        }
       }
     }
   }
-};
+}
 
 @injectable()
 export class PageMemento extends BaseMemento<IPageState> {
-  constructor(
+  constructor (
     @inject(CType.KeyObjDb)
     protected keyObjDbContainer: KeyObjDbContainer
   ) {
-    super(keyObjDbContainer);
-    this.key = 'memento.page';
+    super(keyObjDbContainer)
+    this.key = 'memento.page'
   }
 
-  public getDefaultSchema() {
-    return PageSchema;
+  public getDefaultSchema () {
+    return PageSchema
   }
 }

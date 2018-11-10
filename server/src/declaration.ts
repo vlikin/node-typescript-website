@@ -25,19 +25,19 @@ export type IConfig = {
 }
 
 export interface IInstallable {
-  install(): Promise<void>,
+  install (): Promise<void>,
 
-  uninstall(): Promise<void>
+  uninstall (): Promise<void>
 }
 
 export interface ISaveable {
-  save(): Promise<void>;
+  save (): Promise<void>
 
-  load(): Promise<any>;
+  load (): Promise<any>
 }
 
 export interface ITokenData {
-  id: string;
+  id: string
   iat?: string
 }
 
@@ -60,4 +60,4 @@ export const CType = {
     Post: Symbol.for('Content'),
     Resume: Symbol.for('Resume')
   }
-};
+}
