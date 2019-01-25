@@ -40,6 +40,12 @@ import {
   ResumeListAdminRoute,
   ResumeSaveAdminRoute
 } from './route/admin/resume.g'
+import {InversifyExpressServer} from 'inversify-express-utils'
+import {ServerV2Container} from './container/server-v2'
+import {Application} from 'express'
+
+// Server V2
+import './controller/admin'
 
 declare var process: {
   env: {
@@ -138,6 +144,18 @@ export function bootstrapServer (config: IConfig): Container {
   container.bind<IRoute>(CType.IRoute).to(PageSetAdminRoute)
 
   container.bind<IRoute>(CType.IRoute).to(UploadFileAdminRoute)
+
+  return container
+}
+
+export function bootstrapServerV2 (config: IConfig): Container {
+  const container: Container = bootstrapShell(config)
+  container.bind<ServerV2Container>(CType.Server).to(ServerV2Container).inSingletonScope()
+
+  // create server
+  const server = new InversifyExpressServer(container)
+  const app = server.build()
+  container.bind<Application>(CType.App).toConstantValue(app)
 
   return container
 }

@@ -2,6 +2,7 @@ import { injectable } from 'inversify'
 import { AbstactAdminRoute, EMethod, IRouteInfo } from '../../core/route'
 import { NextFunction, Request, Response } from 'express'
 
+// V2 Ok.
 @injectable()
 export class ClientConfigAdminRoute extends AbstactAdminRoute {
   constructor () {
