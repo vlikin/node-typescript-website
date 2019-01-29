@@ -1,4 +1,4 @@
-import {BaseHttpController, controller, httpGet, httpPost} from 'inversify-express-utils'
+import {BaseHttpController, controller, httpGet, httpPost, isAuthenticated} from 'inversify-express-utils'
 import {inject} from 'inversify'
 import {CType, IConfig} from '../declaration'
 import {PageMemento} from '../memento/page'
@@ -12,6 +12,7 @@ export class AdminController extends BaseHttpController {
   private pageMemento: PageMemento
 
   @httpGet('/client-config')
+  @isAuthenticated()
   private clientConfig () {
     return this.json({
       config: this.config.client

@@ -1,4 +1,5 @@
 import 'reflect-metadata'
+import express from 'express'
 import { Container } from 'inversify'
 import { ICommand } from './core/command'
 import { CliContainer } from './container/cli'
@@ -46,6 +47,7 @@ import {Application} from 'express'
 
 // Server V2
 import './controller/admin'
+import {AuthenticationContainer} from './container/authentication'
 
 declare var process: {
   env: {
@@ -150,12 +152,16 @@ export function bootstrapServer (config: IConfig): Container {
 
 export function bootstrapServerV2 (config: IConfig): Container {
   const container: Container = bootstrapShell(config)
+  container.bind<AuthenticationContainer>(CType.Authentication).to(AuthenticationContainer).inSingletonScope()
   container.bind<ServerV2Container>(CType.Server).to(ServerV2Container).inSingletonScope()
 
   // create server
-  const server = new InversifyExpressServer(container)
-  const app = server.build()
+  const app = express()
   container.bind<Application>(CType.App).toConstantValue(app)
+  const serverContainer = container.get<ServerV2Container>(CType.Server)
+  serverContainer.build()
+  const server = new InversifyExpressServer(container, null, null, app, AuthenticationContainer)
+  server.build()
 
   return container
 }

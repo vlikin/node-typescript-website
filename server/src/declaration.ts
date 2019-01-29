@@ -43,6 +43,7 @@ export interface ITokenData {
 
 export const CType = {
   App: Symbol.for('App'),
+  Authentication: Symbol.for('Authentication'),
   Core: Symbol.for('Core'),
   Shell: Symbol.for('Shell'),
   Config: Symbol.for('Config'),
