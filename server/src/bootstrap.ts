@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import express from 'express'
-import { Container } from 'inversify'
+import { Container, interfaces } from 'inversify'
 import { ICommand } from './core/command'
 import { CliContainer } from './container/cli'
 import {
@@ -85,7 +85,7 @@ export function bootstrapCore (config: IConfig): Container {
  * Creates the top library layer. The application layers are based on.
  */
 export function bootstrapShell (config: IConfig): Container {
-  let container: Container = bootstrapCore(config)
+  const container = bootstrapCore(config)
 
   container.bind<PageMemento>(CType.Memento.Page).to(PageMemento).inSingletonScope()
   container.bind<PostModel>(CType.Content.Post).to(PostModel).inSingletonScope()
@@ -142,8 +142,8 @@ export function bootstrapServer (config: IConfig): Container {
   container.bind<IRoute>(CType.IRoute).to(ResumeGetAdminRoute)
   container.bind<IRoute>(CType.IRoute).to(ResumeDeleteAdminRoute)
 
-  container.bind<IRoute>(CType.IRoute).to(PageGetAdminRoute)
-  container.bind<IRoute>(CType.IRoute).to(PageSetAdminRoute)
+  container.bind<IRoute>(CType.IRoute).to(PageGetAdminRoute) // Moved.
+  container.bind<IRoute>(CType.IRoute).to(PageSetAdminRoute) // Moved
 
   container.bind<IRoute>(CType.IRoute).to(UploadFileAdminRoute)
 
@@ -151,7 +151,7 @@ export function bootstrapServer (config: IConfig): Container {
 }
 
 export function bootstrapServerV2 (config: IConfig): Container {
-  const container: Container = bootstrapShell(config)
+  const container = bootstrapShell(config)
   container.bind<AuthenticationContainer>(CType.Authentication).to(AuthenticationContainer).inSingletonScope()
   container.bind<ServerV2Container>(CType.Server).to(ServerV2Container).inSingletonScope()
 

@@ -4,7 +4,6 @@ import { interfaces } from 'inversify-express-utils'
 import AuthProvider = interfaces.AuthProvider
 import Principal = interfaces.Principal
 import { CoreContainer } from './core'
-import { ObjectID } from 'bson'
 import {CType} from '../declaration'
 
 export interface IUserData {
