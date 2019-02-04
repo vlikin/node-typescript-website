@@ -1,9 +1,9 @@
 import should = require('should')
-import {Request} from 'express'
-import {bootstrapServerV2, resolveConfig} from '../../bootstrap'
-import {AuthenticationContainer, UserPrincipal} from '../../container/authentication'
-import {CType, ITokenData} from '../../declaration'
-import {CoreContainer} from '../../container/core'
+import { Request } from 'express'
+import { bootstrapServerV2, resolveConfig } from '../../bootstrap'
+import { AuthenticationContainer, UserPrincipal } from '../../container/authentication'
+import { CType, ITokenData } from '../../declaration'
+import { CoreContainer } from '../../container/core'
 
 describe('Authentication Container', () => {
   const config = resolveConfig()

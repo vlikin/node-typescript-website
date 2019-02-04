@@ -4,7 +4,7 @@ import { interfaces } from 'inversify-express-utils'
 import AuthProvider = interfaces.AuthProvider
 import Principal = interfaces.Principal
 import { CoreContainer } from './core'
-import {CType} from '../declaration'
+import { CType } from '../declaration'
 
 export interface IUserData {
   id?: string
@@ -53,7 +53,7 @@ export class AuthenticationContainer implements AuthProvider {
           // Authenticated.
           return new UserPrincipal(data)
         } else {
-          throw new Error('The token data has the wrong structure.');
+          throw new Error('The token data has the wrong structure.')
         }
       }
     } else {

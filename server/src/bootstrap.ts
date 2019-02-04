@@ -41,13 +41,13 @@ import {
   ResumeListAdminRoute,
   ResumeSaveAdminRoute
 } from './route/admin/resume.g'
-import {InversifyExpressServer} from 'inversify-express-utils'
-import {ServerV2Container} from './container/server-v2'
-import {Application} from 'express'
+import { InversifyExpressServer } from 'inversify-express-utils'
+import { ServerV2Container } from './container/server-v2'
+import { Application } from 'express'
 
 // Server V2
 import './controller/admin'
-import {AuthenticationContainer} from './container/authentication'
+import { AuthenticationContainer } from './container/authentication'
 
 declare var process: {
   env: {

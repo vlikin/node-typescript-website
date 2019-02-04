@@ -8,6 +8,7 @@
     "compile": "tsc",
     "compile-watch": "tsc -w",
     "tslint": "tslint -c ./tslint.json 'src/**/*.ts'",
+    "tslint-fix": "tslint -c ./tslint.json 'src/**/*.ts' --fix",
     "cli": "node built/cli.js",
     "server": "node built/server.js",
     "dev:server": "configFile=../config/dev.js node-dev $NODE_DEBUG_OPTION built/server.js",
