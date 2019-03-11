@@ -39,6 +39,7 @@ export class DbContainer {
   }
 
   async dispose (): Promise<void> {
+    this.db = null
     return (await this.getClient()).close()
   }
 }

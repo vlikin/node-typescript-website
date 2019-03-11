@@ -1,28 +1,18 @@
-import 'reflect-metadata';
-import {group, action, build, registerGroups} from 'inversify-commander-utils';
-import {Container, inject, injectable} from 'inversify';
-import program from 'commander';
+import 'reflect-metadata'
+import { build, registerGroups } from 'inversify-commander-utils'
+import program from 'commander'
+import { bootstrapShell, resolveConfig } from './bootstrap'
 
-@group('printer')
-class TestGroup {
+// Register commander containers.
+import './cli/index'
 
-  @inject(TodoContainer)
-  public todoContainer!: TodoContainer;
+const config = resolveConfig()
+const container = bootstrapShell(config)
 
-  @action(
-    'A <parameter>',
-    [
-      { pattern: '-c, --count <mode>', description: 'Number of prints.' }
-    ]
-  )
-  public testA(parameter: string, command: any) {
-    console.log(this.todoContainer.printPaper());
-    console.log(parameter, command.count);
-  }
+registerGroups(container)
+build(program, container)
 
+if (require.main === module) {
+  program
+    .parse(process.argv)
 }
-
-const container = new Container();
-container.bind(TodoContainer).to(TodoContainer);
-registerGroups(container);
-build(program, container);
