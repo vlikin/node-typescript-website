@@ -36,7 +36,11 @@ There is an example under. Keep attention on:
 * ts-node is used, *.ts files are processed.
 * configFile has to be set.
 ```
- configFile=../config/dev.js ts-node ./src/cli_inv.ts cli:initial-data
+  configFile=../config/dev.js ts-node ./src/cli_inv.ts cli:initial-data
+```
+The version prepared is:
+```
+  npm run dev:cli -- --help
 ```
 ### Commands
 #### --help

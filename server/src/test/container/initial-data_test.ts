@@ -1,4 +1,4 @@
-import { bootstrapCli, resolveConfig } from '../../bootstrap'
+import { bootstrapShell, resolveConfig } from '../../bootstrap'
 import { ShellContainer } from '../../container/shell'
 import { CType } from '../../declaration'
 import { InitialDataContainer } from '../../container/initial-data'
@@ -9,7 +9,7 @@ import { ResumeModel } from '../../model/resume'
 
 describe('Initial Data container', () => {
   const config = resolveConfig()
-  const container = bootstrapCli(config)
+  const container = bootstrapShell(config)
   const pageMemento = container.get<PageMemento>(CType.Memento.Page)
   const resumeContainer = container.get<ResumeModel>(CType.Content.Resume)
   const postContainer = container.get<PostModel>(CType.Content.Post)
@@ -38,7 +38,7 @@ describe('Initial Data container', () => {
     })
 
     it('Un-structual parts migration', async () => {
-      await initialDataContainer.migrateUnstructualParts(data)
+      await initialDataContainer.migrateUnstructualParts(data, basePath)
       let state = await pageMemento.getState()
       should(state.section).not.null()
     })

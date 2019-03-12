@@ -4,17 +4,13 @@
   "description": "",
   "main": "build/console.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha -r node_modules/reflect-metadata/Reflect.js --require ts-node/register src/test/**/*test.ts",
     "compile": "tsc",
-    "compile-watch": "tsc -w",
-    "tslint": "tslint -c ./tslint.json 'src/**/*.ts'",
-    "lint-fix": "tslint -c tslint.json --fix 'src/**/*.ts'",
+    "tslint-fix": "tslint -c tslint.json --fix 'src/**/*.ts'",
     "cli": "node built/cli.js",
-    "tcli": "ts-node src/cli_inv.ts",
     "server": "node built/server.js",
     "dev:server": "configFile=../config/dev.js node-dev $NODE_DEBUG_OPTION built/server.js",
-    "dev:cli": "configFile=../config/dev.js node-dev $NODE_DEBUG_OPTION built/cli.js",
-    "dev:cli initial-data": "configFile=../config/dev.js node-dev $NODE_DEBUG_OPTION built/cli.js initial-data"
+    "dev:cli": "configFile=../config/dev.js ts-node $NODE_DEBUG_OPTION src/cli.ts"
   },
   "repository": {
     "type": "git",

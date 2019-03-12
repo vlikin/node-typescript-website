@@ -36,7 +36,7 @@ export class ShellContainer {
   async install (): Promise<void> {
     await this.coreContainer.install()
     await this.keyObjDbContainer.install()
-    await this.dynamicConfigMemento.setState(this.config.dynamicConfig)
+    await this.dynamicConfigMemento.setState({ ...this.config.dynamicConfig })
 
     // Content.
     await this.postContent.install()

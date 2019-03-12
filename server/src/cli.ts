@@ -1,9 +1,18 @@
-import { Container } from 'inversify'
-import { bootstrapCli, resolveConfig } from './bootstrap'
-import { CliContainer } from './container/cli'
-import { CType } from './declaration'
+import 'reflect-metadata'
+import { build, registerGroups } from 'inversify-commander-utils'
+import program from 'commander'
+import { bootstrapShell, resolveConfig } from './bootstrap'
 
-let config = resolveConfig()
-let container: Container = bootstrapCli(config)
-let cli = container.get<CliContainer>(CType.Cli)
-cli.parse(process.argv)
+// Register commander containers.
+import './cli/index'
+
+const config = resolveConfig()
+const container = bootstrapShell(config)
+
+registerGroups(container)
+build(program, container)
+
+if (require.main === module) {
+  program
+    .parse(process.argv)
+}

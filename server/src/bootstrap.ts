@@ -1,13 +1,5 @@
 import 'reflect-metadata'
 import { Container } from 'inversify'
-import { ICommand } from './core/command'
-import { CliContainer } from './container/cli'
-import {
-  ChangeAdminPasswordCommand,
-  InstallCommand,
-  ReinstallCommand,
-  UninstallCommand
-} from './command/index'
 import { ClientConfigAdminRoute } from './route/admin/client-config'
 import { GetTokenRoute } from './route/get-token'
 import { TestRoute } from './route/test'
@@ -20,7 +12,6 @@ import { DynamicConfigMemento } from './memento/dynamic-config'
 import { CoreContainer } from './container/core'
 import { ShellContainer } from './container/shell'
 import { PostModel } from './model/post'
-import { InitialDataCommand } from './command/initial-data'
 import {
   PostCreateAdminRoute,
   PostDeleteAdminRoute,
@@ -84,24 +75,6 @@ export function bootstrapShell (config: IConfig): Container {
   container.bind<ResumeModel>(CType.Content.Resume).to(ResumeModel).inSingletonScope()
   container.bind<ShellContainer>(CType.Shell).to(ShellContainer).inSingletonScope()
   container.bind<InitialDataContainer>(CType.InitialData).to(InitialDataContainer).inSingletonScope()
-
-  return container
-}
-
-/**
- * Creates the start point of the application. The second layer.
- * It is used for Cli applications.
- */
-export function bootstrapCli (config: IConfig): Container {
-  let container: Container = bootstrapShell(config)
-  container.bind<CliContainer>(CType.Cli).to(CliContainer).inSingletonScope()
-
-  // Registers commands.
-  container.bind<ICommand>(CType.ICommand).to(InstallCommand)
-  container.bind<ICommand>(CType.ICommand).to(UninstallCommand)
-  container.bind<ICommand>(CType.ICommand).to(ReinstallCommand)
-  container.bind<ICommand>(CType.ICommand).to(ChangeAdminPasswordCommand)
-  container.bind<ICommand>(CType.ICommand).to(InitialDataCommand)
 
   return container
 }
