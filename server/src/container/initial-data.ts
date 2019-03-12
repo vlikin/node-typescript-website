@@ -50,8 +50,9 @@ export class InitialDataContainer {
     }
   }
 
-  async migrateUnstructualParts (_doc: any): Promise<void> {
-    let aboutMeImagePath = this.coreContainer.moveFileToStorage('initial-data/images/viktor-snow.jpg', true)
+  async migrateUnstructualParts (_doc: any, basePath: string): Promise<void> {
+    const imagePath = path.resolve(path.join(basePath, 'initial-data/images/viktor-snow.jpg'))
+    let aboutMeImagePath = this.coreContainer.moveFileToStorage(imagePath, true)
 
     let doc = _.cloneDeep(_doc)
     let state = {
@@ -136,7 +137,7 @@ export class InitialDataContainer {
 
   async migrate (basePath= '.'): Promise<void> {
     let doc = this.getInitialData(basePath)
-    await this.migrateUnstructualParts(doc)
+    await this.migrateUnstructualParts(doc, basePath)
     await this.migratePosts(doc.section.blog)
     await this.migrateResumes(doc.section.resume)
   }
