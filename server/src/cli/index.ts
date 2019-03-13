@@ -12,26 +12,10 @@ export class IndexGroup {
 
   @inject(CType.Shell)
   private shellContainer: ShellContainer
-
   @inject(CType.Memento.DynamicConfig)
   private dynamicConfigMemento: DynamicConfigMemento
-
   @inject(CType.InitialData)
   private initialDataContainer: InitialDataContainer
-
-    // @inject(TodoContainer)
-    // public todoContainer!: TodoContainer;
-
-  @action(
-        'A <parameter>',
-    [
-            { pattern: '-c, --count <mode>', description: 'Number of prints.' }
-    ]
-    )
-    public testA (parameter: string, command: any) {
-        // console.log(this.todoContainer.printPaper());
-    console.log(parameter, command.count)
-  }
 
   @action('install')
   public async install (command: any, options: any = {}) {

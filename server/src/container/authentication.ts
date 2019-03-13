@@ -53,7 +53,8 @@ export class AuthenticationContainer implements AuthProvider {
           // Authenticated.
           return new UserPrincipal(data)
         } else {
-          throw new Error('The token data has the wrong structure.')
+          // Authenticated but not authorized.
+          return new UserPrincipal({})
         }
       }
     } else {

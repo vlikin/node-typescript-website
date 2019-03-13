@@ -3,7 +3,7 @@ import request from 'supertest'
 import { CType, IConfig, ITokenData } from '../../declaration'
 import { bootstrapServerV2, resolveConfig } from '../../bootstrap'
 import { Application } from 'express'
-import { ServerV2Container } from '../../container/server-v2'
+import { ServerContainer } from '../../container/server'
 import { CoreContainer } from '../../container/core'
 import { ShellContainer } from '../../container/shell'
 import { InitialDataContainer } from '../../container/initial-data'
@@ -11,8 +11,8 @@ import { IPostData, PostModel } from '../../model/post'
 import _ from 'lodash'
 import { ObjectID } from 'bson'
 import { IResumeData, ResumeModel } from '../../model/resume'
-import * as path from "path"
-import * as fs from "fs"
+import * as path from 'path'
+import * as fs from 'fs'
 
 describe('Controller Admin', () => {
   const config: IConfig = resolveConfig()
@@ -22,7 +22,7 @@ describe('Controller Admin', () => {
   const resumeModel = container.get<ResumeModel>(CType.Content.Resume)
   const shellContainer = container.get<ShellContainer>(CType.Shell)
   const initialDataContainer = container.get<InitialDataContainer>(CType.InitialData)
-  const serverContainer = container.get<ServerV2Container>(CType.Server)
+  const serverContainer = container.get<ServerContainer>(CType.Server)
   const app = container.get<Application>(CType.App)
   serverContainer.build()
   const tokenData: ITokenData = {
