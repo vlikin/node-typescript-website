@@ -1,12 +1,9 @@
 import { bootstrapShell, resolveConfig } from '../../bootstrap'
 import { ShellContainer } from '../../container/shell'
 import { CType } from '../../declaration'
-import { build, registerGroups, TYPE as CliType } from 'inversify-commander-utils'
-import program from 'commander'
+import { registerGroups, TYPE as CliType } from 'inversify-commander-utils'
 import '../../cli/index'
 import { IndexGroup } from '../../cli/index'
-import { makeLoggerMiddleware } from 'inversify-logger-middleware'
-let logger = makeLoggerMiddleware()
 import colors from 'colors'
 import should from 'should'
 

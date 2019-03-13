@@ -1,10 +1,6 @@
 import 'reflect-metadata'
+import express, { Application } from 'express'
 import { Container } from 'inversify'
-import { ClientConfigAdminRoute } from './route/admin/client-config'
-import { GetTokenRoute } from './route/get-token'
-import { TestRoute } from './route/test'
-import { IRoute } from './core/route'
-import { ServerContainer } from './container/server'
 import { CType, IConfig } from './declaration'
 import { DbContainer } from './container/db'
 import { KeyObjDbContainer } from './container/key-obj-db'
@@ -12,25 +8,17 @@ import { DynamicConfigMemento } from './memento/dynamic-config'
 import { CoreContainer } from './container/core'
 import { ShellContainer } from './container/shell'
 import { PostModel } from './model/post'
-import {
-  PostCreateAdminRoute,
-  PostDeleteAdminRoute,
-  PostGetAdminRoute,
-  PostListAdminRoute,
-  PostSaveAdminRoute
-} from './route/admin/post.g'
-import { UploadFileAdminRoute } from './route/admin/upload-file'
 import { InitialDataContainer } from './container/initial-data'
 import { PageMemento } from './memento/page'
-import { PageGetAdminRoute, PageSetAdminRoute } from './route/admin/page.g'
-import { IndexRoute } from './route'
 import { ResumeModel } from './model/resume'
-import {
-  ResumeCreateAdminRoute,
-  ResumeDeleteAdminRoute, ResumeGetAdminRoute,
-  ResumeListAdminRoute,
-  ResumeSaveAdminRoute
-} from './route/admin/resume.g'
+import { InversifyExpressServer } from 'inversify-express-utils'
+import { ServerContainer } from './container/server'
+
+// Server controller registration.
+import './controller/index'
+import './controller/admin'
+
+import { AuthenticationContainer } from './container/authentication'
 
 declare var process: {
   env: {
@@ -68,7 +56,7 @@ export function bootstrapCore (config: IConfig): Container {
  * Creates the top library layer. The application layers are based on.
  */
 export function bootstrapShell (config: IConfig): Container {
-  let container: Container = bootstrapCore(config)
+  const container = bootstrapCore(config)
 
   container.bind<PageMemento>(CType.Memento.Page).to(PageMemento).inSingletonScope()
   container.bind<PostModel>(CType.Content.Post).to(PostModel).inSingletonScope()
@@ -79,38 +67,18 @@ export function bootstrapShell (config: IConfig): Container {
   return container
 }
 
-/**
- * Creates the start point of the application. The second layer.
- * It is used for a web applications.
- */
-export function bootstrapServer (config: IConfig): Container {
-  let container: Container = bootstrapShell(config)
+export function bootstrapServerV2 (config: IConfig): Container {
+  const container = bootstrapShell(config)
+  container.bind<AuthenticationContainer>(CType.Authentication).to(AuthenticationContainer).inSingletonScope()
   container.bind<ServerContainer>(CType.Server).to(ServerContainer).inSingletonScope()
 
-  // Registers routes.
-  container.bind<IRoute>(CType.IRoute).to(IndexRoute)
-  container.bind<IRoute>(CType.IRoute).to(TestRoute)
-  container.bind<IRoute>(CType.IRoute).to(GetTokenRoute)
-
-  // AdminService.
-  container.bind<IRoute>(CType.IRoute).to(ClientConfigAdminRoute)
-
-  container.bind<IRoute>(CType.IRoute).to(PostListAdminRoute)
-  container.bind<IRoute>(CType.IRoute).to(PostCreateAdminRoute)
-  container.bind<IRoute>(CType.IRoute).to(PostSaveAdminRoute)
-  container.bind<IRoute>(CType.IRoute).to(PostGetAdminRoute)
-  container.bind<IRoute>(CType.IRoute).to(PostDeleteAdminRoute)
-
-  container.bind<IRoute>(CType.IRoute).to(ResumeListAdminRoute)
-  container.bind<IRoute>(CType.IRoute).to(ResumeCreateAdminRoute)
-  container.bind<IRoute>(CType.IRoute).to(ResumeSaveAdminRoute)
-  container.bind<IRoute>(CType.IRoute).to(ResumeGetAdminRoute)
-  container.bind<IRoute>(CType.IRoute).to(ResumeDeleteAdminRoute)
-
-  container.bind<IRoute>(CType.IRoute).to(PageGetAdminRoute)
-  container.bind<IRoute>(CType.IRoute).to(PageSetAdminRoute)
-
-  container.bind<IRoute>(CType.IRoute).to(UploadFileAdminRoute)
+  // create server
+  const app = express()
+  container.bind<Application>(CType.App).toConstantValue(app)
+  const serverContainer = container.get<ServerContainer>(CType.Server)
+  serverContainer.build()
+  const server = new InversifyExpressServer(container, null, null, app, AuthenticationContainer)
+  server.build()
 
   return container
 }
